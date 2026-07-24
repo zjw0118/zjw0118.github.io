@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>版本、档案数字资源库信息管理平台建设（02包）投标研判报告</title>
+<style>
+  :root{
+    --blue:#1F4E79; --blue2:#2E75B6; --light:#D9E2F3; --green:#548235;
+    --amber:#BF8F00; --red:#C00000; --bg:#F5F7FA; --card:#FFFFFF; --line:#D6DCE4;
+  }
+  *{box-sizing:border-box;}
+  body{font-family:"Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+    margin:0;background:var(--bg);color:#222;line-height:1.7;font-size:15px;}
+  .wrap{max-width:1080px;margin:0 auto;padding:28px 22px 60px;}
+  header{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border-radius:12px;padding:26px 30px;margin-bottom:22px;}
+  header h1{margin:0 0 6px;font-size:24px;}
+  header .sub{opacity:.92;font-size:14px;}
+  .tag{display:inline-block;background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;margin:8px 8px 0 0;font-size:12.5px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px 24px;margin-bottom:18px;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .card h2{margin:0 0 14px;font-size:19px;color:var(--blue);border-left:5px solid var(--blue2);padding-left:12px;}
+  .card h3{font-size:15.5px;color:var(--blue2);margin:16px 0 8px;}
+  table{width:100%;border-collapse:collapse;margin:8px 0 4px;font-size:13.5px;}
+  th,td{border:1px solid var(--line);padding:8px 10px;vertical-align:top;text-align:left;}
+  th{background:var(--light);font-weight:600;color:#1F4E79;}
+  tr:nth-child(even) td{background:#FBFCFE;}
+  .star{color:var(--red);font-weight:700;}
+  .up{color:var(--amber);font-weight:700;}
+  .pill{display:inline-block;border-radius:6px;padding:1px 8px;font-size:12px;font-weight:600;}
+  .p-red{background:#FCE4E4;color:var(--red);}
+  .p-amber{background:#FFF4D6;color:var(--amber);}
+  .p-green{background:#E6F2E2;color:var(--green);}
+  .p-blue{background:#E2EFFF;color:var(--blue);}
+  .note{background:#FFF8E6;border:1px solid #F0D98A;border-left:4px solid var(--amber);border-radius:8px;padding:12px 16px;margin:12px 0;font-size:13.5px;color:#6b5300;}
+  .warn{background:#FDECEC;border:1px solid #F0B4B4;border-left:4px solid var(--red);border-radius:8px;padding:12px 16px;margin:12px 0;font-size:13.5px;color:#8a1a1a;}
+  .ok{background:#EAF4E6;border:1px solid #B9DCA8;border-left:4px solid var(--green);border-radius:8px;padding:12px 16px;margin:12px 0;font-size:13.5px;color:#3f6211;}
+  ul{margin:8px 0 8px 4px;padding-left:20px;} li{margin:5px 0;}
+  .kv{display:grid;grid-template-columns:150px 1fr;gap:6px 14px;font-size:14px;}
+  .kv div:nth-child(odd){font-weight:600;color:#444;}
+  .footer{text-align:center;color:#888;font-size:12.5px;margin-top:26px;}
+  .concl{font-size:15px;}
+  .concl b{color:var(--blue);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>版本、档案数字资源库信息管理平台建设（02包）· 投标研判报告</h1>
+  <div class="sub">采购人：北京理工大学 ｜ 分包：02包（版本、档案数字资源库信息管理平台建设）｜ 分析日期：2026-07-24</div>
+  <div>
+    <span class="tag">数据来源：第四章 服务需求（02包）</span>
+    <span class="tag">招标限价：135 万元</span>
+    <span class="tag">工期：合同签订后 4 个月</span>
+    <span class="tag">等保二级</span>
+    <span class="tag">国产化硬约束</span>
+  </div>
+</header>
+
+<div class="note">
+  <b>研判范围说明：</b>本报告仅基于《第四章 服务需求（02包）》单章内容生成。招标文件中的<b>评分办法、价格分计算公式、废标/实质性条款、截标时间与地点、投标保证金、投标人资格条件、付款方式</b>等分列于第一章至第六章，本报告对其标注「待补充」。报价策略与最终投标决策须在取得上述章节后定稿。
+</div>
+
+<!-- 一、研判结论 -->
+<div class="card">
+  <h2>一、研判结论（摘要）</h2>
+  <div class="concl">
+    <p>本项目为北京理工大学<b>数字档案室</b>一体化平台建设，预算 <b>135 万元</b>，范围包含 5 大功能模块 + 2~3T 历史数据迁移 + 一套国产化单机版，且须对接 OA、教务、资产、网站发布、CAS、钉钉（i北理）、EMS 等多套校内系统，并满足<b>等保二级</b>与<b>国产化迁移</b>硬约束。</p>
+    <p><b>总体判断：</b>技术门槛<b>中等偏高</b>——核心是「成熟档案软件产品 + 多系统定制对接 + 国产化适配 + 国档局验收咨询」的组合能力，而非纯研发。具备档案管理系统产品且已完成国产化的厂商较易切入；纯集成商风险较高。</p>
+    <p><b>关键风险点（按紧迫度）：</b></p>
+    <ul>
+      <li><span class="pill p-red">高</span> 工期仅 <b>4 个月</b>须完成开发、部署、对接、迁移、制度编写及验收，几乎无缓冲；等保测评还须在验收后 6 个月内完成。</li>
+      <li><span class="pill p-red">高</span> <b>人员锁定</b>：项目经理须「高级信息系统项目管理工程师 + 5 年」、咨询顾问须「档案系列馆员以上职称 + 5 年」，且实施中原则上不许更换、岗位不可兼任——人力编排与证书真实性是硬门槛。</li>
+      <li><span class="pill p-red">高</span> <b>报价决策无法定</b>：价格分公式、评分权重、废标条款均在第三章，付款在第六章，本章未披露，<b>当前不能定报价</b>。</li>
+      <li><span class="pill p-amber">中</span> 验收「功能性能不满足则<b>无偿整改并承担损失</b>」+ 配合国档局验收（2 年内）周期长，商务兜底责任重。</li>
+      <li><span class="pill p-amber">中</span> 对接费用全部含在本项目，且现有国产单机环境「未安装数据库」，单机版须自行适配，隐性工作量大。</li>
+    </ul>
+    <div class="ok">
+      <b>建议：</b>在取得第三、五、六章后，按「先合规、再评分、后报价」的顺序推进；现阶段可并行启动 (1) 产品国产化适配核验、(2) 校内系统对接可行性调研、(3) 人员证书与社保证明归集、(4) 2~3T 迁移方案与工期倒排。
+    </div>
+  </div>
+</div>
+
+<!-- 二、项目速览 -->
+<div class="card">
+  <h2>二、项目速览</h2>
+  <div class="kv">
+    <div>分包名称</div><div>版本、档案数字资源库信息管理平台建设（02包）</div>
+    <div>采购人 / 地点</div><div>北京理工大学良乡校区（北京市房山区良乡东路9号）</div>
+    <div>招标限价</div><div><b>1,350,000 元</b>（最高投标限价，超出可能废标）</div>
+    <div>采购目标</div><div>建符合国档局《推进机关数字档案室建设实施办法（试行）》的数字档案室系统，对接校内业务系统，实现档案「收、管、存、用、销」全生命周期管理</div>
+    <div>执行标准</div><div>GB/T 18894-2016；等保二级以上；国档局数字档案室认定标准</div>
+    <div>建设内容</div><div>①数字档案管理系统 ②电子文件在线归档 ③档案管理咨询（三合一制度）④安全验证保障 ⑤学生档案管理平台；另含 2~3T 历史数据迁移 + 国产化单机版（终身授权）</div>
+    <div>技术要求</div><div>B/S 架构；成熟云计算框架；支持后期国产化替代（服务器/数据库/OS/中间件）；等保二级以上</div>
+    <div>现有国产环境</div><div>银河麒麟操作系统 + 龙芯 CPU，<b>未安装数据库软件</b></div>
+    <div>工期</div><div>合同签订后 <b>4 个月</b>内完成开发/部署/对接/迁移/制度/验收；等保测评验收后 6 个月内；质保 1 年</div>
+    <div>维保 SLA</div><div>7×24 远程；2 小时应急处置；一般故障 6h 解决；复杂故障 48h 到场；免费质保 1 年</div>
+    <div>付款方式</div><div><span class="pill p-amber">待补充</span> 见第六章 合同部分</div>
+    <div>评分 / 价格 / 废标</div><div><span class="pill p-amber">待补充</span> 见第三章；人员打分见第五章</div>
+  </div>
+</div>
+
+<!-- 三、招标限价与报价空间 -->
+<div class="card">
+  <h2>三、招标限价与报价空间</h2>
+  <table>
+    <tr><th>维度</th><th>本章披露</th><th>研判</th></tr>
+    <tr><td>最高限价</td><td>1,350,000 元</td><td>报价天花板明确。需覆盖 5 大模块 + 2~3T 迁移 + 单机版 + 全部对接费用 + 1 年质保 + 咨询与验收配合，<b>单价空间偏紧</b>。</td></tr>
+    <tr><td>价格分权重</td><td>未披露</td><td><span class="pill p-amber">待补充</span> 第三章价格分公式未给，无法测算得分曲线与最优报价点。</td></tr>
+    <tr><td>费用边界</td><td>「与各业务系统对接费用全部包含在本项目建设中」「基础设施（服务器）由采购人提供」</td><td>对接成本由我方承担，但硬件不计入我方成本——报价时须把对接人天与单机版数据库许可单独核算。</td></tr>
+    <tr><td>隐性成本</td><td>国产单机环境无数据库；2~3T 迁移；国档局验收咨询（2 年内）</td><td>迁移质量与验收周期长，建议单列「迁移+验收咨询」专项报价，避免被限价挤压利润。</td></tr>
+  </table>
+  <div class="warn">⚠ 在取得第三章价格分公式前，<b>不要锁定最终报价</b>。可先按「成本+合理毛利」给出内部目标价区间（建议预留 8%~12% 谈判/让利空间），待评分细则出来后再校准。</div>
+</div>
+
+<!-- 四、建设内容拆解 -->
+<div class="card">
+  <h2>四、建设内容拆解（范围与工作量）</h2>
+  <table>
+    <tr><th>序号</th><th>建设内容</th><th>关键要求 / 范围</th><th>工作量提示</th></tr>
+    <tr><td>1</td><td>数字档案管理系统</td><td>收/管/存/用全流程，含 1.1~1.14 共 14 项子功能（★/▲ 见第五节），向珠海校区全宗授权、异地跨校区</td><td>核心模块，工作量最大</td></tr>
+    <tr><td>2</td><td>电子文件在线归档</td><td>对接 OA(API)、教务(视图)、资产(视图)、网站发布(API/中间库)；CAS 单点登录/组织机构同步/i北理(钉钉)</td><td>多系统接口，集成风险高</td></tr>
+    <tr><td>3</td><td>档案管理咨询</td><td>梳理「三合一」制度、电子文件归档/管理流程，配合编制制度文本，满足数字档案室认定</td><td>咨询能力硬要求</td></tr>
+    <tr><td>4</td><td>安全验证保障</td><td>三员分离；符合《档案信息系统安全保护基本要求》；等保二级</td><td>安全设计强制项</td></tr>
+    <tr><td>5</td><td>学生档案管理平台</td><td>采集/整理/利用/转递/统计；对接 CAS、教务学生 API、就业 API、EMS；钉钉移动端</td><td>独立子平台，接口多</td></tr>
+    <tr><td>6</td><td>历史数据迁移</td><td>现有档案系统 <b>2~3T</b> 历史数据迁移</td><td>迁移质量与周期风险</td></tr>
+    <tr><td>7</td><td>国产化单机版</td><td>一套适配银河麒麟+龙芯（无数据库）的单机版档案系统，终身授权、单次购买</td><td>须自备/适配数据库</td></tr>
+  </table>
+</div>
+
+<!-- 五、关键功能条款 -->
+<div class="card">
+  <h2>五、关键功能条款（★核心 / ▲重要）</h2>
+  <p>本章对功能条款以 <span class="star">★</span>（核心/通常对应实质性或高分项）与 <span class="up">▲</span>（重要/加分或差异化项）标注。下表逐条列出并标注合规难度，供方案与偏离表编制参考。</p>
+
+  <h3><span class="star">★ 核心条款（须逐项满足，建议作为实质性响应底线）</span></h3>
+  <table>
+    <tr><th>编号</th><th>条款</th><th>核心要求</th><th>合规难度</th></tr>
+    <tr><td>★1.1</td><td>接收采集</td><td>在线/离线自动/半自动接收采集、元数据关联、OCR 索引、断点续传、打包封装</td><td><span class="pill p-green">低</span> 成熟产品标配</td></tr>
+    <tr><td>★1.2</td><td>版本和档案整理</td><td>自动归类排序、著录标引、格式转换、自动组件组卷编号、规范性自动检查</td><td><span class="pill p-green">低</span></td></tr>
+    <tr><td>★1.3</td><td>四性检测</td><td>归档/移交/离线接收/保存各环节自定义四性检测，报告导出</td><td><span class="pill p-blue">中</span> 需符合国标</td></tr>
+    <tr><td>★1.6</td><td>检索利用</td><td>多途径检索、在线查借阅全流程、协查推送、移动端(钉钉)</td><td><span class="pill p-blue">中</span> 移动端依赖钉钉集成</td></tr>
+    <tr><td>★1.10</td><td>长期保存</td><td>XML 封装、检测、离线存储、备份恢复，对接蓝光光盘库异质备份</td><td><span class="pill p-blue">中</span> 依赖现有星震同源蓝光库</td></tr>
+    <tr><td>★1.12</td><td>系统管理</td><td>多全宗管理、三员分立、防扩散水印、日志管理</td><td><span class="pill p-blue">中</span> 安全控制强制</td></tr>
+    <tr><td>★(2)</td><td>电子文件在线归档</td><td>与 OA/教务/资产/网站发布系统对接实现在线归档；配置通用归档接口</td><td><span class="pill p-amber">高</span> 多系统对接，需现场调研</td></tr>
+    <tr><td>★(3)</td><td>咨询服务保障</td><td>「三合一」制度等梳理，配合编制业务流程规范与管理制度文本</td><td><span class="pill p-blue">中</span> 需档案专业顾问</td></tr>
+    <tr><td>★(4)</td><td>安全保障</td><td>三员分离管理，符合等保二级测评要求</td><td><span class="pill p-blue">中</span> 等保测评硬约束</td></tr>
+    <tr><td>★5.1</td><td>学生档案-采集整理</td><td>批量导入、OCR 挂接、分级分类、关键字段校验、继承数据</td><td><span class="pill p-green">低</span></td></tr>
+    <tr><td>★5.2</td><td>学生档案-利用</td><td>多维度查询、动态水印防截屏、转递登记、EMS 对接、签收短信</td><td><span class="pill p-blue">中</span> EMS 需中国邮政授权</td></tr>
+  </table>
+
+  <h3><span class="up">▲ 重要条款（差异化/加分项，体现方案深度）</span></h3>
+  <table>
+    <tr><th>编号</th><th>条款</th><th>核心要求</th><th>价值</th></tr>
+    <tr><td>▲1.4</td><td>版本和档案保存</td><td>库房库位管理；对接星震同源蓝光存储管理系统异质保存</td><td>体现与校方现有系统集成度</td></tr>
+    <tr><td>▲1.8</td><td>鉴定处置</td><td>开放/价值鉴定、销毁审批全流程、辅助鉴定</td><td>功能完整度</td></tr>
+    <tr><td>▲1.9</td><td>开放审核与移交</td><td>辅助开放审核、生成 AIP 包、登记移交去向</td><td>对接国档局验收</td></tr>
+    <tr><td>▲1.11</td><td>统计管理</td><td>多维度统计、内置全国档案事业统计年报模板、自定义报表</td><td>加分项</td></tr>
+    <tr><td>▲1.13</td><td>扩展配置</td><td>按「三合一」配置归档范围与保管期限表、自定义元数据</td><td>灵活性</td></tr>
+    <tr><td>▲1.14</td><td>版本和档案征集</td><td>实物档案 i北理(钉钉)在线登记、拍照上传、后台审核</td><td>移动端差异化</td></tr>
+    <tr><td>▲(2)</td><td>应用集成</td><td>CAS 单点登录、组织机构同步、消息待办、i北理(钉钉)</td><td>集成深度，影响评分</td></tr>
+    <tr><td>▲5.3</td><td>学生档案-权限与安全</td><td>分角色权限、全记录、防篡改、每日自动备份、容灾恢复</td><td>安全合规</td></tr>
+    <tr><td>▲5.4</td><td>学生档案-统计与提醒</td><td>数量/利用统计、毕业季批量转递、材料缺漏智能提醒</td><td>实用加分</td></tr>
+    <tr><td>▲5.5</td><td>学生档案-系统对接</td><td>CAS、教务学生 API、就业 API、EMS 下单及反馈</td><td>多接口集成</td></tr>
+    <tr><td>▲5.6</td><td>移动端支持（钉钉）</td><td>学生/老师在 i北理(钉钉)内查阅、审批、提醒</td><td>移动端差异化</td></tr>
+    <tr><td>▲(6)</td><td>数据迁移及单机版</td><td>2~3T 迁移 + 银河麒麟+龙芯单机版</td><td>工作量与国产化适配</td></tr>
+  </table>
+</div>
+
+<!-- 六、技术门槛 -->
+<div class="card">
+  <h2>六、技术门槛分析</h2>
+  <ul>
+    <li><b>国产化硬约束：</b>系统须支持向国产平台迁移（服务器/数据库/OS/中间件匹配主流国产）；且须交付一套适配<b>银河麒麟 + 龙芯（无数据库）</b>的单机版。→ 若我方产品尚未完成国产化适配，需评估改造工作量与数据库选型（如达梦/人大金仓）。</li>
+    <li><b>等保二级：</b>系统须通过等保二级测评并符合《档案信息系统安全保护基本要求》，三员分离是硬性安全设计。→ 安全方案与测评预算须单列。</li>
+    <li><b>多系统对接：</b>需对接 OA、教务、资产、网站发布、CAS、组织机构、i北理(钉钉)、EMS 共 8 类校内/外部系统，且<b>对接费用全部含在本项目</b>。→ 建议尽调各系统接口现状（API/数据库视图/中间库），否则集成成本失控。</li>
+    <li><b>蓝光存储对接：</b>须与校方现有「星震同源蓝光存储管理系统」对接实现异质备份。→ 该现有系统的厂商/接口规格未知，可能是<b> incumbent 优势信号</b>（见第八节）。</li>
+    <li><b>B/S + 云计算框架：</b>架构要求常规，成熟产品即可满足；重点是「可扩展、可国产替代」。</li>
+  </ul>
+</div>
+
+<!-- 七、资质与人员门槛 -->
+<div class="card">
+  <h2>七、资质与人员门槛</h2>
+  <table>
+    <tr><th>岗位</th><th>硬性要求（原文）</th><th>投标准备</th></tr>
+    <tr><td>项目经理（1人）</td><td>5 年（含）以上同类实施经验 + <b>高级信息系统项目管理工程师</b>资格</td><td>证书 + 近 5 年同类项目合同/验收证明 + 社保</td></tr>
+    <tr><td>咨询顾问（1人）</td><td>5 年（含）以上同类实施经验 + <b>档案专业背景及档案系列馆员以上职称</b></td><td>职称证书 + 档案专业履历证明</td></tr>
+    <tr><td>质量测试 / 研发支持 / 运维（各1名）</td><td>各 3 年（含）以上同类实施经验（可兼任）</td><td>简历 + 社保证明</td></tr>
+    <tr><td>兼任与更换</td><td>项目经理 / 质量研发运维 / 咨询顾问<b>不可兼任</b>；实施中<b>原则上不许更换</b>，替换者资历不得低于原人</td><td>人员锁定，排兵需谨慎，留备份人选</td></tr>
+  </table>
+  <div class="warn">⚠ 「高级信息系统项目管理工程师」与「档案系列馆员以上职称」是<b>硬证书门槛</b>，且人员不可更换——投标前务必确认证书真实有效、社保连续、无兼职冲突。这是最容易被否决的资格项之一。</div>
+</div>
+
+<!-- 八、倾向性/控标观察 -->
+<div class="card">
+  <h2>八、倾向性 / 既有环境观察（非指控，供策略参考）</h2>
+  <div class="note">
+    以下为基于本章披露的客观信号，仅供竞争策略判断，<b>不构成对采购方违规的指控</b>：
+    <ul>
+      <li>明确指定对接<b>现有「星震同源蓝光存储管理系统」</b>和<b>现有档案系统</b>做 2~3T 迁移—— incumbent（现有系统厂商）在接口、数据格式上具天然信息优势。</li>
+      <li>移动端统一为<b>「i北理」（钉钉）</b>，单点登录与组织机构同步基于校内 <b>CAS</b>——需校方配合， incumbent 通常已打通。</li>
+      <li>国产化环境精确到<b>银河麒麟 + 龙芯</b>——若 incumbent 已完成该组合适配，将形成隐性壁垒。</li>
+      <li>含「配合通过国档局数字档案室验收」咨询——熟悉国档局认定流程的厂商更有利。</li>
+    </ul>
+    <b>策略含义：</b>若我方非 incumbent，须以「更优产品 + 明确对接方案 + 国产化适配证明 + 国档局验收咨询业绩」对冲信息差；并在投标前通过澄清函确认各系统接口规格，降低集成不确定性。
+  </div>
+</div>
+
+<!-- 九、工期与质保风险 -->
+<div class="card">
+  <h2>九、工期、质保与商务风险</h2>
+  <table>
+    <tr><th>风险项</th><th>条款</th><th>等级</th><th>应对</th></tr>
+    <tr><td>工期极紧</td><td>合同签订 4 个月内完成开发/部署/对接/迁移/制度/验收</td><td><span class="pill p-red">高</span></td><td>倒排工期，并行启动对接调研与产品部署；迁移单列专项</td></tr>
+    <tr><td>等保测评滞后</td><td>等保测评在验收后 6 个月内完成</td><td><span class="pill p-amber">中</span></td><td>提前启动等保咨询与整改，避免卡验收</td></tr>
+    <tr><td>无偿整改</td><td>功能性能不满足则投标人无偿整改并承担损失</td><td><span class="pill p-red">高</span></td><td>需求与验收标准书面锁定，控制范围蔓延</td></tr>
+    <tr><td>验收周期长</td><td>配合通过国档局数字档案室验收（2 年内）</td><td><span class="pill p-amber">中</span></td><td>咨询与验收配合计入成本与人员计划</td></tr>
+    <tr><td>人员不可更换</td><td>原则上不许更换，替换者资历不低于原人</td><td><span class="pill p-red">高</span></td><td>锁定核心人员，备岗预案</td></tr>
+    <tr><td>付款未披露</td><td>付款方式见第六章</td><td><span class="pill p-amber">中</span></td><td><span class="pill p-amber">待补充</span> 评估现金流与垫资能力</td></tr>
+  </table>
+</div>
+
+<!-- 十、废标/实质性风险点 -->
+<div class="card">
+  <h2>十、实质性 / 废标风险点（来自本章硬性要求）</h2>
+  <p>本章未给出正式废标条款（见第三章），但下列「应 / 需 / 须」要求若不满足，极可能在符合性审查或验收中触发风险，须逐条在投标文件中响应并附证明：</p>
+  <ul>
+    <li>报价超过 <b>1,350,000 元</b> → 限价红线。</li>
+    <li>未通过<b>等保二级</b>测评 / 未实现<b>三员分离</b>。</li>
+    <li>未实现与 OA/教务/资产/网站发布系统的<b>在线归档对接</b>，或未完成 <b>CAS/i北理(钉钉)</b> 集成。</li>
+    <li>未完成 <b>2~3T 历史数据迁移</b>，或未交付<b>银河麒麟+龙芯单机版</b>。</li>
+    <li>项目经理缺<b>高级信息系统项目管理工程师</b>证，或咨询顾问缺<b>馆员以上职称</b>。</li>
+    <li>核心 <span class="star">★</span> 功能条款（1.1/1.2/1.3/1.6/1.10/1.12、在线归档、咨询、安全、5.1/5.2）出现负偏离。</li>
+    <li>工期、质保 SLA、人员不可更换等承诺无法履约。</li>
+  </ul>
+  <div class="warn">⚠ 正式废标/否决条款以<b>第三章</b>为准，投标前必须逐字核对并形成《合规检查表》（见配套 xlsx 第 4 表）。</div>
+</div>
+
+<!-- 十一、可行性研判与策略 -->
+<div class="card">
+  <h2>十一、竞标可行性研判与策略建议</h2>
+  <h3>可行性研判</h3>
+  <ul>
+    <li><b>可投性：</b>技术路径清晰、需求文档详尽，无无法逾越的技术障碍；适合「已有档案软件产品 + 国产化适配 + 校内系统对接经验」的厂商。<b>结论：可投，但需补齐第三章/第六章信息。</b></li>
+    <li><b>竞争优势来源：</b>① 产品是否已适配银河麒麟+龙芯；② 是否有国档局数字档案室认定/验收咨询业绩；③ 是否已有与校方同类系统的对接案例；④ 人员证书是否齐备。</li>
+    <li><b>主要威胁：</b>现有系统厂商（incumbent）在蓝光库、历史数据、CAS/钉钉打通上的信息优势与迁移便利性。</li>
+  </ul>
+  <h3>行动清单（投标前）</h3>
+  <table>
+    <tr><th>优先级</th><th>行动</th><th>负责</th><th>依赖</th></tr>
+    <tr><td>P0</td><td>获取第三章（评分/价格公式/废标）、第五章（人员打分）、第六章（付款），重做报价与评分模型</td><td>投标负责人</td><td>招标文件全文</td></tr>
+    <tr><td>P0</td><td>核验产品国产化适配（银河麒麟+龙芯+国产数据库），准备适配证明</td><td>技术</td><td>产品团队</td></tr>
+    <tr><td>P0</td><td>归集人员证书与社保证明（高级项目经理证、馆员职称等）</td><td>人力/商务</td><td>候选人员</td></tr>
+    <tr><td>P1</td><td>调研 8 类校内/外部系统接口现状，输出对接方案与工作量</td><td>技术</td><td>采购人澄清</td></tr>
+    <tr><td>P1</td><td>编制 2~3T 迁移方案与工期倒排（4 个月交付）</td><td>实施</td><td>现有系统资料</td></tr>
+    <tr><td>P1</td><td>针对 ★ 条款做逐条响应与偏离表，▲ 条款做加分方案</td><td>方案</td><td>需求文档</td></tr>
+    <tr><td>P2</td><td>就接口规格、验收标准、付款节点等提交澄清函</td><td>商务</td><td>招标人</td></tr>
+  </table>
+</div>
+
+<!-- 十二、需补充信息 -->
+<div class="card">
+  <h2>十二、需补充的其他章节信息清单</h2>
+  <table>
+    <tr><th>缺失维度</th><th>所在章节</th><th>对研判的影响</th></tr>
+    <tr><td>评分办法与权重（价格/技术/商务）</td><td>第三章 评标办法</td><td>决定得分结构与发力重点</td></tr>
+    <tr><td>价格分计算公式</td><td>第三章</td><td>报价决策的核心依据</td></tr>
+    <tr><td>废标 / 实质性否决条款</td><td>第三章</td><td>投标合规底线</td></tr>
+    <tr><td>人员详细打分标准与证明材料</td><td>第五章</td><td>人员项得分测算</td></tr>
+    <tr><td>付款方式 / 节点</td><td>第六章 合同</td><td>现金流与垫资风险评估</td></tr>
+    <tr><td>截标时间 / 地点 / 投标保证金</td><td>第一章/第二章</td><td>投标排期与资金安排</td></tr>
+    <tr><td>投标人资格条件 / 联合体</td><td>第二章 投标人须知</td><td>投标资格判定</td></tr>
+  </table>
+</div>
+
+<div class="footer">
+  本报告由投标决策助手基于《第四章 服务需求（02包）》自动研判生成 · 分析日期 2026-07-24 · 配套文件：02包_第四章服务需求_投标分析表单.xlsx<br>
+  声明：本章未提供评分/价格/废标/付款等条款，相关结论以招标文件全文为准，竞争对手数据未作任何臆测。
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>投标研判报告 · 北京理工大学 版本、档案数字资源库信息管理平台（02包）</title>
+<style>
+  :root{
+    --bg:#f5f6f8; --card:#ffffff; --ink:#1f2733; --sub:#5b6672; --line:#e5e8ee;
+    --brand:#b3121a; --brand-soft:#fbeaea; --gold:#b8860b; --green:#1f7a3d; --green-soft:#e7f4ec;
+    --amber:#b8860b; --amber-soft:#fdf3dd; --red:#c0392b; --red-soft:#fbe9e7; --blue:#1f5fa8; --blue-soft:#e8f0fa;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,sans-serif;line-height:1.7;font-size:15px}
+  .wrap{max-width:1000px;margin:0 auto;padding:32px 22px 80px}
+  header.top{background:linear-gradient(135deg,#8f0e15,#b3121a);color:#fff;border-radius:16px;padding:30px 32px;box-shadow:0 8px 26px rgba(140,15,20,.22)}
+  header.top .tag{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);padding:3px 12px;border-radius:999px;font-size:12.5px;letter-spacing:.5px}
+  header.top h1{margin:14px 0 6px;font-size:25px;font-weight:700;letter-spacing:.3px}
+  header.top .sub{opacity:.92;font-size:14px}
+  .meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
+  .meta-grid .m{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:11px;padding:12px 14px}
+  .meta-grid .m .k{font-size:12px;opacity:.85}
+  .meta-grid .m .v{font-size:17px;font-weight:700;margin-top:3px}
+
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px 26px;margin-top:20px;box-shadow:0 2px 10px rgba(20,30,50,.03)}
+  h2{font-size:19px;margin:0 0 16px;padding-left:12px;border-left:4px solid var(--brand);line-height:1.3}
+  h3{font-size:15.5px;margin:20px 0 9px;color:var(--ink)}
+  p{margin:8px 0}
+  .muted{color:var(--sub)}
+  small{color:var(--sub)}
+
+  /* verdict */
+  .verdict{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+  .score-ring{--p:62;width:132px;height:132px;border-radius:50%;flex:0 0 auto;
+    background:conic-gradient(var(--amber) calc(var(--p)*1%), #edf0f4 0);
+    display:flex;align-items:center;justify-content:center;position:relative}
+  .score-ring::before{content:"";position:absolute;inset:12px;background:#fff;border-radius:50%}
+  .score-ring .num{position:relative;text-align:center}
+  .score-ring .num b{font-size:34px;color:var(--amber);display:block;line-height:1}
+  .score-ring .num span{font-size:12px;color:var(--sub)}
+  .verdict .concl{flex:1;min-width:280px}
+  .badge{display:inline-block;padding:5px 14px;border-radius:8px;font-weight:700;font-size:15px}
+  .badge.go{background:var(--amber-soft);color:#8a6400;border:1px solid #e9cf8a}
+  .kv-inline{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .chip{font-size:12.5px;padding:4px 11px;border-radius:999px;border:1px solid var(--line);background:#fafbfc;color:var(--sub)}
+
+  table{width:100%;border-collapse:collapse;margin-top:10px;font-size:14px}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}
+  th{background:#f3f5f8;font-weight:600;color:var(--ink)}
+  tr:nth-child(even) td{background:#fafbfc}
+
+  .pill{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:6px;white-space:nowrap}
+  .p-star{background:var(--red-soft);color:var(--red)}
+  .p-tri{background:var(--amber-soft);color:#8a6400}
+  .p-h{background:var(--red-soft);color:var(--red)}
+  .p-m{background:var(--amber-soft);color:#8a6400}
+  .p-l{background:var(--green-soft);color:var(--green)}
+
+  .note{border-radius:11px;padding:14px 16px;margin:14px 0;font-size:14px}
+  .note.warn{background:var(--red-soft);border:1px solid #f0c4bd}
+  .note.info{background:var(--blue-soft);border:1px solid #cfe0f2}
+  .note.ok{background:var(--green-soft);border:1px solid #bfe3cc}
+  .note b{color:inherit}
+
+  .cols2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:760px){.cols2{grid-template-columns:1fr}.meta-grid{grid-template-columns:repeat(2,1fr)}.wrap{padding:18px 14px 60px}}
+
+  ul.clean{margin:8px 0;padding-left:20px}
+  ul.clean li{margin:5px 0}
+  .lockcard{border:1px solid var(--line);border-left:4px solid var(--red);border-radius:10px;padding:13px 15px;margin:11px 0;background:#fffdfd}
+  .lockcard .t{font-weight:700;font-size:14.5px}
+  .lockcard .t .lvl{float:right;font-size:11.5px}
+  .strat{border:1px solid var(--line);border-left:4px solid var(--green);border-radius:10px;padding:13px 15px;margin:11px 0;background:#fbfefc}
+  .footer{text-align:center;color:var(--sub);font-size:12.5px;margin-top:30px}
+  .rank{font-weight:700;color:var(--brand)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <span class="tag">投标研判报告 · AI招投标分析师</span>
+    <h1>版本、档案数字资源库信息管理平台建设（02包）</h1>
+    <div class="sub">采购人：北京理工大学　|　招标限价：¥1,350,000　|　公开招标（2026-30802-ZC0105）　|　报告日期：2026-07-24</div>
+    <div class="meta-grid">
+      <div class="m"><div class="k">项目预算</div><div class="v">135 万元</div></div>
+      <div class="m"><div class="k">建设工期</div><div class="v">4 个月</div></div>
+      <div class="m"><div class="k">公告阶段</div><div class="v">招标中</div></div>
+      <div class="m"><div class="k">发布时间</div><div class="v">2026-07-23</div></div>
+    </div>
+  </header>
+
+  <!-- 结论 -->
+  <section>
+    <h2>一、研判结论</h2>
+    <div class="verdict">
+      <div class="score-ring"><div class="num"><b>62</b><span>综合可投分</span></div></div>
+      <div class="concl">
+        <span class="badge go">谨慎参与（Conditional GO）</span>
+        <p style="margin-top:12px">本项目是<b>高校数字档案室建设</b>的典型标的，需求专业、门槛偏高，且存在明显的<b>存量系统绑定与在位供应商倾向</b>。若贵司为成熟档案软件厂商、具备信创产品与钉钉/CAS 对接能力，可作为<b>重点争取或有效陪标</b>；若为通用软件集成商、无档案专用产品与档案专业职称人员，建议<b>放弃或寻求联合体</b>。</p>
+        <div class="kv-inline">
+          <span class="chip">利润空间：中等（135万含实施+集成+咨询+迁移）</span>
+          <span class="chip">技术门槛：高</span>
+          <span class="chip">在位优势：明显</span>
+          <span class="chip">资质门槛：档案专业职称卡口</span>
+        </div>
+      </div>
+    </div>
+    <div class="note warn" style="margin-top:18px">
+      <b>核心判断：</b>需求书内含 <b>多处指向存量环境与既有系统对接</b>的条款（星震同源蓝光存储、i北理钉钉、CAS、珠海校区全宗授权、2–3T 历史数据迁移），这些条款天然利好<b>已服务北理工档案业务的在位厂商</b>。新进入者需在实施成本、集成风险与响应速度上付出更高代价。
+    </div>
+  </section>
+
+  <!-- 项目速览 -->
+  <section>
+    <h2>二、项目速览</h2>
+    <table>
+      <tr><th style="width:150px">采购人</th><td>北京理工大学（实施地点：北京市房山区良乡校区；需向珠海校区全宗授权）</td></tr>
+      <tr><th>建设目标</th><td>建设符合国家档案局《推进机关数字档案室建设实施办法（试行）》及《电子档案管理系统通用功能要求》的数字档案室系统，配合通过国档局数字档案室认定；实现版本与档案"收、管、存、用、销"全生命周期管理</td></tr>
+      <tr><th>建设内容（5+2）</th><td>①数字档案管理系统　②电子文件在线归档　③业务标准体系/档案管理咨询　④安全验证保障　⑤学生档案管理平台；另含 <b>历史数据迁移（2–3T）</b> 与 <b>国产化单机版档案系统</b>（龙芯+银河麒麟，终身授权）</td></tr>
+      <tr><th>技术要求</th><td>B/S 架构、成熟云计算框架、支持后期国产化替代；<b>等保二级测评</b>（验收后6个月内完成）</td></tr>
+      <tr><th>工期/质保</th><td>合同签订后 <b>4个月</b> 完成开发/部署/对接/迁移/制度编写及验收；免费质保 1 年；7×24 响应，2 小时应急、一般故障 6 小时、复杂故障 48 小时到场</td></tr>
+      <tr><th>验收硬约束</th><td>通过等保二级测评；<b>2 年内</b>配合通过国档局数字档案室验收；不达标须无偿整改并担责</td></tr>
+    </table>
+  </section>
+
+  <!-- 控标倾向分析 -->
+  <section>
+    <h2>三、控标与倾向性分析（重点）</h2>
+    <p class="muted">以下条款对"是否有既有服务基础"高度敏感，构成事实上的竞争壁垒。评级为对<b>新进入者</b>的不利程度。</p>
+
+    <div class="lockcard">
+      <div class="t">星震同源蓝光存储对接 <span class="lvl pill p-h">高壁垒</span></div>
+      <p style="margin:6px 0 0">条款 1.4 / 1.10 要求与学校现有 <b>星震同源蓝光光盘库</b> 对接实现异质备份。指定既有硬件品牌，未与该系统做过接口的厂商需额外投入联调成本，且成功与否受第三方配合影响。</p>
+    </div>
+    <div class="lockcard">
+      <div class="t">现有档案系统 2–3T 历史数据迁移 <span class="lvl pill p-h">在位强绑定</span></div>
+      <p style="margin:6px 0 0">条款(6)要求迁移现有档案系统历史数据。<b>掌握原系统数据结构者具备决定性优势</b>；外部厂商迁移风险与工作量不可控，是最强的在位供应商信号。</p>
+    </div>
+    <div class="lockcard">
+      <div class="t">i北理（钉钉）深度集成 <span class="lvl pill p-m">中高壁垒</span></div>
+      <p style="margin:6px 0 0">检索/借阅/审批/实物拍照登记/待办均需嵌入 i北理钉钉端（CAS 登录）。需具备钉钉工作台开发经验与学校移动端接入资源。</p>
+    </div>
+    <div class="lockcard">
+      <div class="t">CAS 单点登录 + OA/教务/资产/网站多系统对接 <span class="lvl pill p-m">中高壁垒</span></div>
+      <p style="margin:6px 0 0">条款(2)要求对接 OA(API)、教务(库视图)、资产(库视图)、网站(API/中间库)，并含第三方系统配合费用"由投标方自行评估"。<b>集成费用风险转嫁给投标方</b>，报价需预留充足集成余量。</p>
+    </div>
+    <div class="lockcard">
+      <div class="t">珠海校区全宗授权 / 跨校区异地同步 <span class="lvl pill p-m">产品门槛</span></div>
+      <p style="margin:6px 0 0">要求多全宗、跨校区异地同步并为异地灾备预留。需成熟的多全宗/多租户产品架构，通用集成商难以短期实现。</p>
+    </div>
+    <div class="lockcard">
+      <div class="t">国产化单机版（龙芯 + 银河麒麟） <span class="lvl pill p-m">产品门槛</span></div>
+      <p style="margin:6px 0 0">须提供已适配龙芯 CPU + 银河麒麟 OS 的单机版档案系统（终身授权）。要求厂商具备信创版本或完成过信创适配，非普遍能力。</p>
+    </div>
+    <div class="note info">
+      <b>合规提示：</b>上述条款多为指向既有环境的"实质性对接要求"，属采购人正当业务需求，一般难以质疑为违规控标；但客观上抬高外部厂商门槛。<b>建议在投标答疑阶段就"星震同源接口协议""第三方系统配合责任边界""迁移数据交付形式"提出书面澄清</b>，锁定风险责任。
+    </div>
+  </section>
+
+  <!-- 硬指标 / 否决项 -->
+  <section>
+    <h2>四、关键功能条款（★否决项 / ▲加分项）</h2>
+    <p class="muted"><span class="pill p-star">★</span> 实质性要求，缺项存在废标风险，须逐条正面响应；<span class="pill p-tri">▲</span> 重要/加分项，影响技术得分。</p>
+    <div class="cols2">
+      <div>
+        <h3><span class="pill p-star">★</span> 实质性要求（约10项）</h3>
+        <ul class="clean">
+          <li>1.1 在线/离线接收采集、归档信息包封装</li>
+          <li>1.3 四性检测（可配置方案 + 报告导出）</li>
+          <li>1.6 检索利用（多途径检索 + 查借阅全流程 + 钉钉端）</li>
+          <li>1.10 长期保存（XML封装、蓝光对接、异质备份）</li>
+          <li>1.12 系统管理（多全宗、三员分立、防扩散水印）</li>
+          <li>(2) 电子文件在线归档（OA/教务/资产/网站对接）</li>
+          <li>(3) 咨询服务保障（三合一制度、制度文本编制）</li>
+          <li>(4) 安全保障（三员分离、等保二级）</li>
+          <li>5.1 学生档案采集整理　5.2 学生档案利用</li>
+        </ul>
+      </div>
+      <div>
+        <h3><span class="pill p-tri">▲</span> 重要/加分项（约12项）</h3>
+        <ul class="clean">
+          <li>1.4 库位管理 + 星震同源蓝光对接</li>
+          <li>1.8 鉴定处置（价值鉴定/销毁全流程）</li>
+          <li>1.9 开放审核与移交（AIP 包）</li>
+          <li>1.11 统计管理（全国档案年报模板）</li>
+          <li>1.13 扩展配置（三合一制度配置）</li>
+          <li>1.14 珍贵版本/实物档案征集（钉钉登记）</li>
+          <li>(2) CAS 单点登录 + 组织机构同步</li>
+          <li>5.3 权限与安全　5.4 统计与提醒</li>
+          <li>5.5 与 CAS/教务/就业/EMS 对接　5.6 钉钉移动端</li>
+          <li>(6) 数据迁移 + 国产化单机版</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 竞争格局 -->
+  <section>
+    <h2>五、竞争格局（基于全网中标数据）</h2>
+    <p class="muted">"数字档案室 / 档案管理系统"赛道 Top 中标厂商，及其对本项目的相关度评估。</p>
+    <table>
+      <tr><th style="width:30px">#</th><th>厂商</th><th>累计中标</th><th>优势区域 / 客户</th><th>本项目相关度</th></tr>
+      <tr><td class="rank">1</td><td><b>北京量子伟业信息技术</b></td><td>281 次 / 1.76 亿</td><td>北京本地强，档案馆/高校/央企；主营"档案数字化"</td><td><span class="pill p-h">最高·重点关注</span></td></tr>
+      <tr><td class="rank">2</td><td>紫光软件系统</td><td>911 次 / 2.93 亿</td><td>央企/北京，体量最大，综合信息化</td><td><span class="pill p-m">高</span></td></tr>
+      <tr><td class="rank">3</td><td>北京航星永志科技</td><td>207 次 / 1.81 亿</td><td>北京，组织人事/机关档案见长</td><td><span class="pill p-m">高</span></td></tr>
+      <tr><td class="rank">4</td><td>同方知网数字出版</td><td>175 次 / 1.01 亿</td><td>高校科教客户资源丰富（凯里学院等）</td><td><span class="pill p-m">中高·高校资源</span></td></tr>
+      <tr><td class="rank">5</td><td>上海泰宇信息技术</td><td>217 次 / 11.2 亿</td><td>长三角档案馆为主，客单价高</td><td><span class="pill p-l">中·区域偏南</span></td></tr>
+      <tr><td class="rank">6</td><td>上海中信信息发展</td><td>224 次</td><td>档案局系统，近年活跃度下降</td><td><span class="pill p-l">中低</span></td></tr>
+    </table>
+    <div class="note info">
+      <b>最可能的主要对手：</b>综合"北京本地 + 高校/档案专业 + 活跃度"三维，<b>北京量子伟业</b> 相关度最高，其次为 <b>紫光软件、北京航星永志、同方知网</b>。若贵司非上述梯队且无档案专用产品，正面竞争胜算较低。
+    </div>
+  </section>
+
+  <!-- 采购方分析 -->
+  <section>
+    <h2>六、采购方分析：北京理工大学</h2>
+    <p>北理工档案信息化建设成熟，历史采购涵盖<b>人事档案审核系统、会计档案数字化、会计凭证影像化、档案馆新馆空间改造及库房建设</b>等（近年该校档案相关公告 28 条）。说明：</p>
+    <ul class="clean">
+      <li>采购人对档案业务规范、国档局标准熟悉，<b>评审专业、对技术响应质量要求高</b>，"堆参数"难以蒙混。</li>
+      <li>已建成部分档案系统与配套硬件（含蓝光存储），<b>存量环境复杂</b>，本项目本质是"存量整合 + 升级 + 认定冲刺"，非从零新建。</li>
+      <li>校方目标是<b>通过国档局数字档案室认定</b>（2年内），更看重厂商的认定项目经验与咨询能力，而非单纯软件功能。</li>
+    </ul>
+    <div class="note ok">
+      <b>制胜要点：</b>本项目"档案咨询 + 认定辅导"权重高。能提供<b>已通过国档局数字档案室/档案馆认定案例</b>、并配备<b>档案系列馆员职称咨询顾问</b>的厂商，最契合校方诉求。
+    </div>
+  </section>
+
+  <!-- 资质人员 -->
+  <section>
+    <h2>七、资质与人员门槛</h2>
+    <table>
+      <tr><th style="width:150px">岗位</th><th>硬性要求</th><th>门槛评级</th></tr>
+      <tr><td>项目经理（1人）</td><td>5 年以上同类经验 + <b>高级信息系统项目管理工程师</b></td><td><span class="pill p-m">中</span></td></tr>
+      <tr><td>质量测试/研发支持/运维（各1，可兼）</td><td>各岗位 3 年以上同类经验</td><td><span class="pill p-l">低</span></td></tr>
+      <tr><td>咨询顾问（1人）</td><td>5 年以上经验 + <b>档案专业背景 + 档案系列馆员以上职称</b>（另需高/中级职称）</td><td><span class="pill p-h">高·稀缺卡口</span></td></tr>
+    </table>
+    <div class="note warn">
+      <b>咨询顾问要求是本项目最硬的资质卡口。</b>"档案系列馆员职称"在纯 IT 集成商中极为稀缺，通常仅成熟档案厂商或与档案机构深度合作者具备。<b>若贵司无此类人员，须尽早锁定外部合作/挂靠或组建联合体，否则无法满足实质性人员要求。</b>此外三类岗位不可兼任，团队至少需 3 人配置。
+    </div>
+  </section>
+
+  <!-- 风险清单 -->
+  <section>
+    <h2>八、风险清单</h2>
+    <table>
+      <tr><th style="width:160px">风险项</th><th>说明</th><th style="width:70px">等级</th></tr>
+      <tr><td>在位供应商绑定</td><td>历史数据迁移 + 星震同源对接 + 存量系统集成，利好在位厂商</td><td><span class="pill p-h">高</span></td></tr>
+      <tr><td>咨询顾问资质</td><td>档案系列馆员职称人员稀缺，缺失即无法满足实质性要求</td><td><span class="pill p-h">高</span></td></tr>
+      <tr><td>集成成本失控</td><td>第三方系统配合费用"投标方自行评估"，OA/教务/资产/钉钉/蓝光多点对接</td><td><span class="pill p-h">高</span></td></tr>
+      <tr><td>工期紧</td><td>4 个月完成开发+对接+2-3T迁移+制度编制+验收，无成熟产品难达成</td><td><span class="pill p-m">中</span></td></tr>
+      <tr><td>验收连带责任</td><td>需 2 年内配合通过国档局认定，不达标须无偿整改担责，责任期长</td><td><span class="pill p-m">中</span></td></tr>
+      <tr><td>信创适配</td><td>须交付龙芯+麒麟单机版，未做过信创适配者投入大</td><td><span class="pill p-m">中</span></td></tr>
+      <tr><td>等保二级</td><td>验收后6个月内完成测评，需预留测评整改预算与周期</td><td><span class="pill p-l">低</span></td></tr>
+    </table>
+  </section>
+
+  <!-- 策略建议 -->
+  <section>
+    <h2>九、投标策略建议</h2>
+    <div class="strat"><b>1. 决策分流</b><br>成熟档案软件厂商（有产品+信创版+认定案例）→ <b>重点投</b>；有部分能力但缺档案资质/迁移经验 → <b>组联合体或分包合作</b>；纯集成商无档案产品 → <b>放弃</b>，避免陷入高集成风险低毛利泥潭。</div>
+    <div class="strat"><b>2. 澄清先行（答疑阶段务必提交）</b><br>①星震同源蓝光库接口协议与配合方；②OA/教务/资产/钉钉第三方配合责任与费用边界；③历史数据交付形式（原始库/标准中间格式）；④国档局认定的责任边界与时间节点。将风险以书面澄清固化。</div>
+    <div class="strat"><b>3. 技术响应</b><br>对全部 <span class="pill p-star">★</span> 项做到"逐条正面应答 + 截图/案例佐证"，杜绝废标；对 <span class="pill p-tri">▲</span> 项突出蓝光对接、四性检测、鉴定处置、钉钉集成、信创单机版等差异化能力抢分。</div>
+    <div class="strat"><b>4. 加分锚点</b><br>主打"<b>国档局数字档案室认定成功案例 + 高校档案客户 + 档案馆员职称咨询团队</b>"三张牌，直击校方"通过认定"的核心诉求。</div>
+    <div class="strat"><b>5. 报价策略</b><br>135 万含软件+集成+咨询+迁移+信创单机版+1年质保，实际可支配开发费用有限。<b>在集成/迁移条线预留 15–25% 风险准备金</b>；若确为在位厂商可偏高报价，若为挑战者宜以技术分取胜、价格适度进取。</div>
+  </section>
+
+  <div class="footer">
+    本报告由 AI 招投标分析师基于需求文件解析 + 全网招中标数据生成，市场数据来源于智了标讯。竞争格局与在位判断为数据推断，最终以招标文件全文（资格条件、评分办法、合同条款）及现场答疑为准。<br>生成时间：2026-07-24
+  </div>
+
+</div>
+</body>
+</html>
