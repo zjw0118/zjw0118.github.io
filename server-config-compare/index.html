@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>服务器配置需求对比</title>
+<style>
+  :root{
+    --bg:#f7f8fa; --card:#ffffff; --line:#e5e7eb; --text:#1f2937;
+    --muted:#6b7280; --blue:#2563eb; --green:#047857; --amber:#b45309;
+    --greenbg:#ecfdf5; --amberbg:#fffbeb; --bluebg:#eff6ff;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.6;padding:24px;}
+  .wrap{max-width:1080px;margin:0 auto;}
+  h1{font-size:24px;margin:0 0 4px;}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:20px;}
+  .meta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px;}
+  .meta .box{flex:1;min-width:300px;background:var(--card);border:1px solid var(--line);
+    border-radius:10px;padding:14px 16px;}
+  .meta .box h3{margin:0 0 8px;font-size:15px;color:var(--blue);}
+  .meta .box p{margin:4px 0;font-size:13px;color:var(--muted);}
+  .meta .box p b{color:var(--text);font-weight:600;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:18px 20px;margin-bottom:20px;box-shadow:0 1px 2px rgba(0,0,0,.03);}
+  .card h2{font-size:18px;margin:0 0 14px;display:flex;align-items:center;gap:8px;}
+  .tag{font-size:12px;padding:2px 10px;border-radius:999px;font-weight:600;}
+  .tag.same{background:var(--greenbg);color:var(--green);}
+  .tag.diff{background:var(--amberbg);color:var(--amber);}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top;}
+  thead th{background:var(--bluebg);color:#1e40af;font-weight:600;}
+  td.dim{background:#fafafa;font-weight:600;width:160px;color:#374151;}
+  .a{color:#1d4ed8;}
+  .b{color:#9a3412;}
+  .eq{color:var(--green);font-weight:600;}
+  .ne{color:var(--amber);font-weight:600;}
+  ul{margin:6px 0;padding-left:20px;}
+  li{margin:5px 0;}
+  .note{font-size:12.5px;color:var(--muted);margin-top:10px;padding:10px 12px;
+    background:var(--amberbg);border-radius:8px;border-left:3px solid var(--amber);}
+  .foot{font-size:12px;color:var(--muted);text-align:center;margin-top:24px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>服务器配置需求对比</h1>
+  <div class="sub">两份均为中央国家机关政府采购中心《询价通知书》中的"第四部分 采购需求"</div>
+
+  <div class="meta">
+    <div class="box">
+      <h3>文件 A · 某单位交通研究所</h3>
+      <p><b>项目编号：</b>DZXJ260519010300320</p>
+      <p><b>项目名称：</b>某单位交通研究所服务器（询价）采购项目</p>
+      <p><b>采购人：</b>公安部交通管理科学研究所（无锡）</p>
+      <p><b>供货地点：</b>江苏省无锡市滨湖区钱荣路 88 号</p>
+      <p><b>项目预算：</b>¥100,000.00</p>
+    </div>
+    <div class="box">
+      <h3>文件 B · 中国水利水电科学研究院</h3>
+      <p><b>项目编号：</b>DZXJ260508910284720</p>
+      <p><b>项目名称：</b>中国水利水电科学研究院服务器（询价）采购项目</p>
+      <p><b>采购人：</b>中国水利水电科学研究院（北京）</p>
+      <p><b>供货地点：</b>北京市海淀区玉渊潭南路 3 号中国水科院 D 座 701</p>
+      <p><b>项目预算：</b>¥300,000.00</p>
+    </div>
+  </div>
+
+  <!-- 中标对比 -->
+  <div class="card">
+    <h2>🏆 中标对比 <span class="tag diff">BID</span></h2>
+    <table>
+      <thead><tr><th style="width:200px">对比维度</th><th class="a">文件 A（交通研究所）</th><th class="b">文件 B（水利水电研究院）</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">中标型号</td><td class="a">华为泰山 2280</td><td class="b">华为泰山 2280</td></tr>
+        <tr><td class="dim">中标单价</td><td class="a">¥98,630 /台</td><td class="b">¥98,700 /台</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 相同项 -->
+  <div class="card">
+    <h2>✅ 相同项 <span class="tag same">SAME</span></h2>
+    <table>
+      <thead><tr><th style="width:200px">对比维度</th><th>文件 A（交通研究所）</th><th>文件 B（水利水电研究院）</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">采购品类</td><td colspan="2" class="eq">均为「通用服务器」（货物类，台）</td></tr>
+        <tr><td class="dim">产地要求</td><td colspan="2" class="eq">均要求「中国」国产</td></tr>
+        <tr><td class="dim">原装正品</td><td colspan="2" class="eq">均要求「是」（原装正品行货）</td></tr>
+        <tr><td class="dim">CPU 安全可靠</td><td colspan="2" class="eq">均要求 CPU 符合安全可靠测评要求</td></tr>
+        <tr><td class="dim">政策标准</td><td colspan="2" class="eq">均需满足《通用服务器政府采购需求标准（2023 年版）》（财库〔2023〕33 号）中加"*"指标</td></tr>
+        <tr><td class="dim">免费质保期</td><td colspan="2" class="eq">5 年免费维修质保</td></tr>
+        <tr><td class="dim">上门服务年限</td><td colspan="2" class="eq">5 年</td></tr>
+        <tr><td class="dim">电话支持</td><td colspan="2" class="eq">7×24 小时</td></tr>
+        <tr><td class="dim">上门响应时限</td><td colspan="2" class="eq">接到报修后 12 小时内</td></tr>
+        <tr><td class="dim">采购方式</td><td colspan="2" class="eq">均为电子询价、线上响应；允许代理商、不允许联合体、不接受进口产品</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 差别项 -->
+  <div class="card">
+    <h2>⚠️ 差别项 <span class="tag diff">DIFFERENT</span></h2>
+    <table>
+      <thead><tr><th style="width:170px">对比维度</th><th class="a">文件 A（交通研究所）</th><th class="b">文件 B（水利水电研究院）</th></tr></thead>
+      <tbody>
+        <tr><td class="dim">采购数量</td><td class="a">1 台</td><td class="b">2 台</td></tr>
+        <tr><td class="dim">最高限价/台</td><td class="a">¥100,000.00 /台</td><td class="b">¥150,000.00 /台</td></tr>
+        <tr><td class="dim">CPU 数量</td><td class="a">≥2 颗</td><td class="b">≥2 颗</td></tr>
+        <tr><td class="dim">CPU 主频</td><td class="a">≥ 2.0 GHz</td><td class="b">≥ 2.3 GHz（更高）</td></tr>
+        <tr><td class="dim">CPU 核心数</td><td class="a">单颗 ≥64 核，线程 ≥64 线程</td><td class="b">单颗 ≥20 核（未提线程数）</td></tr>
+        <tr><td class="dim">内存</td><td class="a">≥128GB，DDR5 及以上，速率 ≥4800MT/s，单根支持 16/32/64G，支持扩展</td><td class="b">≥64GB（未提代际/速率/单根规格）</td></tr>
+        <tr><td class="dim">存储</td><td class="a">SSD ≥900GB + HDD ≥4T，支持硬盘扩展</td><td class="b">≥240T（未区分 SSD/HDD，未提扩展）</td></tr>
+        <tr><td class="dim">网口</td><td class="a">≥1 个 1GE 电口 + 1 个 10GE 光口</td><td class="b">未提及</td></tr>
+        <tr><td class="dim">形态/GPU</td><td class="a">高度 4U，主板需支持 GPU 卡</td><td class="b">未提及高度/GPU</td></tr>
+        <tr><td class="dim">操作系统/虚拟化</td><td class="a">无此要求</td><td class="b"><b>核心差异：</b>需提供永久授权正版操作系统 4 套；支持 KVM/Docker/LXC 虚拟化、LVS/haproxy 高可用；内置 KVM，支持作为 KVM/Hyper-V/ESXi 虚机；提供计算平台软件（虚拟机管理、嵌套虚拟化、B/S+C/S 双控制端、告警、CBT 备份等）</td></tr>
+        <tr><td class="dim">供货时间</td><td class="a">合同签订后 30 个日历日</td><td class="b">合同签订后 4 个日历日（更紧）</td></tr>
+        <tr><td class="dim">技术服务响应</td><td class="a">同城 4h、异地 12h 技术响应，2 个工作日解决问题，提供周转设备，停产后续保</td><td class="b">未列明技术响应时效，但要求每月 ≥4 次现场巡检</td></tr>
+        <tr><td class="dim">安装调试服务</td><td class="a">无具体服务要求（写"无"）</td><td class="b">上架（含导轨）、基础配置、OS/数据库安装调试、集群搭建、与现网互通；到货后 3 天完成；验收后 3 月内配合软件适配</td></tr>
+        <tr><td class="dim">交付文档</td><td class="a">未要求</td><td class="b">需提交实施方案、集成测试方案、培训方案、设备测试报告、安装配置文档、运维文档等</td></tr>
+        <tr><td class="dim">售后网点</td><td class="a">无具体要求</td><td class="b">要求当地有售后服务网点</td></tr>
+        <tr><td class="dim">履约保证金</td><td class="a">收取（合同金额 5%，验收合格后 5 工作日无息退还）</td><td class="b">不收取</td></tr>
+      </tbody>
+    </table>
+    <div class="note">
+      注：两份文件正文模板（询价邀请、须知、合同模板、附件格式等）高度一致，差异主要集中在「第四部分 采购需求」的技术指标与售后服务条款，以及少量前附表条目（供货时间、履约保证金）。
+    </div>
+  </div>
+
+  <div class="foot">数据来源：两份 PDF 第四部分「采购需求」及响应人须知前附表 · 生成于配置对比任务</div>
+</div>
+</body>
+</html>
