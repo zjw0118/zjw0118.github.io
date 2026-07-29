@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>招投标公告与成交数据抓取及统计分析计划方案</title>
+<style>
+  :root{
+    --primary:#1e40af;
+    --primary-light:#3b82f6;
+    --primary-bg:#eff4ff;
+    --ink:#1f2933;
+    --ink-soft:#475569;
+    --muted:#94a3b8;
+    --line:#e2e8f0;
+    --bg:#f6f8fc;
+    --card:#ffffff;
+    --accent:#0ea5e9;
+    --shadow:0 1px 3px rgba(15,23,42,.06),0 8px 24px rgba(15,23,42,.05);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.85;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- Layout ---------- */
+  .layout{display:flex;max-width:1280px;margin:0 auto;}
+  .sidebar{
+    width:280px;flex:0 0 280px;
+    position:sticky;top:0;align-self:flex-start;
+    height:100vh;overflow-y:auto;
+    padding:32px 18px 32px 28px;
+    border-right:1px solid var(--line);
+    background:linear-gradient(180deg,#fff 0%,#fbfcff 100%);
+  }
+  .main{flex:1;min-width:0;padding:0 0 80px;}
+
+  /* ---------- Sidebar TOC ---------- */
+  .toc-brand{font-size:13px;font-weight:700;color:var(--primary);letter-spacing:2px;margin-bottom:6px;}
+  .toc-title{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:22px;line-height:1.5;}
+  .toc a{
+    display:flex;align-items:baseline;gap:10px;
+    text-decoration:none;color:var(--ink-soft);
+    font-size:14px;padding:9px 12px;border-radius:9px;
+    transition:all .18s ease;border-left:3px solid transparent;
+  }
+  .toc a .num{font-size:12px;font-weight:700;color:var(--muted);min-width:18px;}
+  .toc a:hover{background:var(--primary-bg);color:var(--primary);}
+  .toc a.active{
+    background:var(--primary-bg);color:var(--primary);font-weight:600;
+    border-left-color:var(--primary);
+  }
+  .toc a.active .num{color:var(--primary);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 55%,#0ea5e9 100%);
+    color:#fff;padding:62px 56px 54px;position:relative;overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;right:-80px;top:-80px;
+    width:320px;height:320px;border-radius:50%;
+    background:rgba(255,255,255,.08);
+  }
+  .hero::before{
+    content:"";position:absolute;right:60px;bottom:-120px;
+    width:240px;height:240px;border-radius:50%;
+    background:rgba(255,255,255,.06);
+  }
+  .hero h1{font-size:32px;font-weight:800;line-height:1.4;max-width:760px;position:relative;z-index:1;}
+
+  /* ---------- Sections ---------- */
+  .content{padding:0 56px;}
+  section{padding-top:52px;scroll-margin-top:24px;}
+  .sec-head{display:flex;align-items:center;gap:16px;margin-bottom:8px;}
+  .sec-badge{
+    flex:0 0 auto;width:42px;height:42px;border-radius:12px;
+    background:var(--primary);color:#fff;font-weight:800;font-size:18px;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 16px rgba(30,64,175,.28);
+  }
+  .sec-head h2{font-size:24px;font-weight:800;color:var(--ink);}
+  .sec-sub{color:var(--ink-soft);font-size:15px;margin:2px 0 22px 58px;}
+
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:26px 30px;margin-bottom:20px;box-shadow:var(--shadow);
+  }
+  .card.lead{background:linear-gradient(180deg,#fbfdff,#f5f9ff);}
+
+  .sub-head{
+    display:flex;align-items:center;gap:10px;
+    font-size:17px;font-weight:700;color:var(--primary);
+    margin:6px 0 14px;padding-bottom:10px;border-bottom:1px dashed var(--line);
+  }
+  .sub-head .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);}
+
+  p{color:var(--ink-soft);font-size:15.5px;margin-bottom:14px;}
+  p:last-child{margin-bottom:0;}
+
+  ul.bullets{list-style:none;margin:4px 0 0;}
+  ul.bullets li{
+    position:relative;padding-left:26px;margin-bottom:12px;
+    color:var(--ink-soft);font-size:15.5px;
+  }
+  ul.bullets li::before{
+    content:"";position:absolute;left:6px;top:13px;
+    width:7px;height:7px;border-radius:50%;
+    background:var(--primary-light);
+  }
+  ul.bullets li:last-child{margin-bottom:0;}
+
+  ol.steps{list-style:none;counter-reset:step;margin:4px 0 0;}
+  ol.steps li{
+    counter-increment:step;position:relative;padding-left:40px;margin-bottom:12px;
+    color:var(--ink-soft);font-size:15.5px;
+  }
+  ol.steps li::before{
+    content:counter(step);
+    position:absolute;left:0;top:2px;width:26px;height:26px;border-radius:8px;
+    background:var(--primary-bg);color:var(--primary);font-weight:700;font-size:13px;
+    display:flex;align-items:center;justify-content:center;
+  }
+
+  .footer{
+    margin:60px 56px 0;padding:24px 0 0;border-top:1px solid var(--line);
+    color:var(--muted);font-size:13px;text-align:center;
+  }
+
+  /* ---------- Mobile ---------- */
+  @media (max-width:920px){
+    .layout{flex-direction:column;}
+    .sidebar{position:static;width:100%;height:auto;border-right:none;border-bottom:1px solid var(--line);}
+    .toc{display:flex;flex-wrap:wrap;gap:6px;}
+    .toc a{border-left:none;}
+    .toc a.active{border-left:none;}
+    .hero,.content,.footer{padding-left:24px;padding-right:24px;}
+    .hero h1{font-size:25px;}
+  }
+  @media print{
+    .sidebar{display:none;}
+    body{background:#fff;}
+    .hero{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    section{page-break-inside:avoid;}
+    .card{box-shadow:none;}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <!-- Sidebar / TOC -->
+  <aside class="sidebar">
+    <div class="toc-brand">可行性方案</div>
+    <div class="toc-title">招投标数据采集与分析计划</div>
+    <nav class="toc" id="toc">
+      <a href="#s1"><span class="num">01</span><span>目标</span></a>
+      <a href="#s2"><span class="num">02</span><span>前期准备与可行性分析</span></a>
+      <a href="#s3"><span class="num">03</span><span>核心抓取字段设定</span></a>
+      <a href="#s4"><span class="num">04</span><span>抓取时间与频率策略</span></a>
+      <a href="#s5"><span class="num">05</span><span>数据汇总表设计</span></a>
+      <a href="#s6"><span class="num">06</span><span>公告与成交数据对应</span></a>
+      <a href="#s7"><span class="num">07</span><span>统计与分析规划</span></a>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <div class="main">
+    <header class="hero">
+      <h1>招投标公告与成交数据抓取及统计分析计划方案</h1>
+    </header>
+
+    <div class="content">
+
+      <!-- 01 -->
+      <section id="s1">
+        <div class="sec-head"><div class="sec-badge">01</div><h2>目标</h2></div>
+        <p class="sec-sub">本方案的核心目的</p>
+        <div class="card lead">
+          <p>本方案目的通过自动抓取手段，获取目标网站的招标公告与成交（中标）数据，并对核心字段进行清洗与结构化整理。最终实现公告与成交数据的精准一一对应，为后续的业务统计分析、商机挖掘及市场洞察提供高质量的数据支撑。</p>
+        </div>
+      </section>
+
+      <!-- 02 -->
+      <section id="s2">
+        <div class="sec-head"><div class="sec-badge">02</div><h2>前期准备：目标网站整理与可行性分析</h2></div>
+        <p class="sec-sub">在正式启动抓取前，需对目标数据源进行评估</p>
+
+        <div class="card">
+          <div class="sub-head"><span class="dot"></span>1. 目标网站梳理</div>
+          <ul class="bullets">
+            <li><strong>官方核心平台（免注册）：</strong>中央政府采购网——电子卖场、中国政府采购网、全国公共交易资源。</li>
+            <li><strong>企业采购平台：</strong>外交部集采中心。</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="sub-head"><span class="dot"></span>2. 抓取可行性分析</div>
+          <ul class="bullets">
+            <li><strong>页面结构分析：</strong>评估目标网站是静态 HTML 还是动态渲染。</li>
+            <li><strong>反爬评估：</strong>检测目标网站是否存在 IP 封禁、验证码、登录限制等反爬策略，制定相应的应对方案。</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 03 -->
+      <section id="s3">
+        <div class="sec-head"><div class="sec-badge">03</div><h2>核心抓取字段设定</h2></div>
+        <p class="sec-sub">为保证后期统计与数据关联的准确性，需统一并标准化以下核心字段</p>
+
+        <div class="card">
+          <div class="sub-head"><span class="dot"></span>1. 基础信息字段</div>
+          <ul class="bullets">
+            <li><strong>项目唯一标识：</strong>项目编号（核心关联键）、项目名称。</li>
+            <li><strong>时间维度：</strong>公告发布时间、成交/中标时间、报名/投标截止时间。</li>
+            <li><strong>地域维度：</strong>地区。</li>
+            <li><strong>业务维度：</strong>行业分类、采购方式（公开招标、竞争性谈判等）、项目类型（货物、工程、服务）。</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="sub-head"><span class="dot"></span>2. 主体与金额字段</div>
+          <ul class="bullets">
+            <li><strong>采购单位：</strong>招标人/采购人名称。</li>
+            <li><strong>预算金额：</strong>招标预算/最高限价。</li>
+            <li><strong>成交单位：</strong>中标/成交供应商名称。</li>
+            <li><strong>成交金额：</strong>实际中标/成交金额。</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 04 -->
+      <section id="s4">
+        <div class="sec-head"><div class="sec-badge">04</div><h2>抓取时间与频率策略</h2></div>
+        <p class="sec-sub">招投标数据具有极强的时效性，需设定合理的抓取调度策略</p>
+        <div class="card">
+          <p>招投标数据具有极强的时效性，需设定合理的抓取调度策略：</p>
+          <ul class="bullets">
+            <li><strong>全量抓取：</strong>在初期，进行一次历史数据的批量抓取，建立基础库。</li>
+            <li><strong>增量抓取：</strong>针对核心目标网站，根据初期数据的周期频率，设定抓取频率。</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 05 -->
+      <section id="s5">
+        <div class="sec-head"><div class="sec-badge">05</div><h2>数据汇总表设计</h2></div>
+        <p class="sec-sub">抓取的数据需统一汇入数据表，建议设计以下核心数据表</p>
+        <div class="card">
+          <p>抓取的数据需统一汇入数据表，建议设计以下核心数据表：</p>
+          <ol class="steps">
+            <li><strong>招标公告表：</strong>所有招标/采购公告的原始及结构化信息。</li>
+            <li><strong>成交/中标公告表：</strong>中标、成交结果公告信息。</li>
+            <li><strong>关联映射：</strong>招标公告与成交结果的对应关系及匹配状态。</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- 06 -->
+      <section id="s6">
+        <div class="sec-head"><div class="sec-badge">06</div><h2>公告与成交数据对应</h2></div>
+        <p class="sec-sub">由于招标公告与成交公告往往在不同时间发布，且部分项目可能流标或变更，实现精准匹配是本项目的核心难点</p>
+
+        <div class="card">
+          <div class="sub-head"><span class="dot"></span>1. 匹配规则（自动关联）</div>
+          <ul class="bullets">
+            <li><strong>项目编号匹配：</strong>以"项目编号"作为第一优先级关联键。若公告与成交公告的项目编号完全一致，则直接建立一对一映射。</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="sub-head"><span class="dot"></span>2. 周期管理</div>
+          <ul class="bullets">
+            <li>在表中增加"项目状态"字段，如：<strong>招标中、已成交、流标/废标、终止</strong>。当抓取到成交公告时，自动更新对应招标公告的状态，形成完整的数据闭环。</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 07 -->
+      <section id="s7">
+        <div class="sec-head"><div class="sec-badge">07</div><h2>统计与分析规划</h2></div>
+        <p class="sec-sub">数据完成结构化与关联后，可直接支撑以下统计需求</p>
+        <div class="card">
+          <p>数据完成结构化与关联后，可直接支撑以下统计需求：</p>
+          <ul class="bullets">
+            <li><strong>数量分析：</strong>统计各区域、各行业、项目类型的招标数量。</li>
+            <li><strong>供应商画像：</strong>基于成交数据，分析供应商中标次数、中标金额及优势项目。</li>
+            <li><strong>价格趋势评估：</strong>对比同类项目的预算金额与实际成交金额，分析合理价格区间、价格趋势、中标价差。</li>
+          </ul>
+        </div>
+      </section>
+
+      <div class="footer">招投标公告与成交数据抓取及统计分析计划方案 · 可行性方案文档</div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // Scroll-spy: highlight active TOC item
+  const links = Array.from(document.querySelectorAll('#toc a'));
+  const map = new Map(links.map(a => [a.getAttribute('href').slice(1), a]));
+  const sections = links.map(a => document.getElementById(a.getAttribute('href').slice(1)));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = map.get(e.target.id);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+  sections.forEach(s => s && observer.observe(s));
+</script>
+</body>
+</html>
