@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中检院门户网站融合改版及国产化改造 — 投标研判报告</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --text: #1a1a2e;
+    --text-secondary: #555;
+    --border: #e0e0e0;
+    --accent: #2563eb;
+    --accent-light: #dbeafe;
+    --green: #16a34a;
+    --green-light: #dcfce7;
+    --red: #dc2626;
+    --red-light: #fee2e2;
+    --yellow: #ca8a04;
+    --yellow-light: #fef9c3;
+    --orange: #ea580c;
+    --orange-light: #fff7ed;
+    --purple: #7c3aed;
+    --purple-light: #ede9fe;
+    --radius: 10px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; background: #f1f5f9; color: var(--text); line-height: 1.6; }
+  .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+
+  /* Header */
+  .header { background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%); color: #fff; border-radius: var(--radius); padding: 32px 28px; margin-bottom: 20px; box-shadow: var(--shadow-md); }
+  .header .project-id { font-size: 13px; opacity: 0.8; margin-bottom: 6px; letter-spacing: 0.5px; }
+  .header h1 { font-size: 22px; font-weight: 700; margin-bottom: 10px; line-height: 1.3; }
+  .header .meta { display: flex; flex-wrap: wrap; gap: 16px; font-size: 14px; opacity: 0.9; }
+  .header .meta span { display: flex; align-items: center; gap: 4px; }
+
+  /* Score Card */
+  .score-section { display: grid; grid-template-columns: 160px 1fr; gap: 20px; margin-bottom: 20px; }
+  .score-card { background: #fff; border-radius: var(--radius); padding: 28px; text-align: center; box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .score-circle { width: 100px; height: 100px; border-radius: 50%; background: conic-gradient(#16a34a 0deg 252deg, #e5e7eb 252deg 360deg); display: flex; align-items: center; justify-content: center; position: relative; }
+  .score-circle::before { content: ''; width: 78px; height: 78px; border-radius: 50%; background: #fff; position: absolute; }
+  .score-value { position: relative; font-size: 36px; font-weight: 800; color: #16a34a; }
+  .score-label { font-size: 14px; color: var(--text-secondary); margin-top: 12px; }
+  .verdict-badge { margin-top: 10px; background: var(--green-light); color: var(--green); padding: 4px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+  .info-card { background: #fff; border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; }
+  .info-item { }
+  .info-item .label { font-size: 12px; color: var(--text-secondary); margin-bottom: 2px; }
+  .info-item .value { font-size: 14px; font-weight: 600; }
+
+  /* Section */
+  .section { background: #fff; border-radius: var(--radius); padding: 24px; margin-bottom: 16px; box-shadow: var(--shadow); }
+  .section h2 { font-size: 17px; font-weight: 700; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--accent-light); display: flex; align-items: center; gap: 8px; }
+  .section h3 { font-size: 15px; font-weight: 600; margin: 16px 0 8px; }
+  .section h3:first-child { margin-top: 0; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 12px 0; }
+  table th { background: var(--bg-secondary); padding: 10px 12px; text-align: left; font-weight: 600; border-bottom: 2px solid var(--border); white-space: nowrap; }
+  table td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  table tr:hover td { background: #fafbfc; }
+
+  /* Badges */
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+  .badge-green { background: var(--green-light); color: var(--green); }
+  .badge-red { background: var(--red-light); color: var(--red); }
+  .badge-yellow { background: var(--yellow-light); color: var(--yellow); }
+  .badge-orange { background: var(--orange-light); color: var(--orange); }
+  .badge-blue { background: var(--accent-light); color: var(--accent); }
+
+  /* Risk */
+  .risk-item { display: flex; gap: 12px; padding: 10px 12px; border-left: 3px solid; margin-bottom: 8px; background: var(--bg-secondary); border-radius: 0 var(--radius) var(--radius) 0; }
+  .risk-high { border-color: var(--red); }
+  .risk-med { border-color: var(--orange); }
+  .risk-low { border-color: var(--yellow); }
+  .risk-level { font-size: 11px; font-weight: 700; text-transform: uppercase; min-width: 48px; }
+  .risk-desc { font-size: 13px; flex: 1; }
+
+  /* Score bar */
+  .score-bar { height: 8px; border-radius: 4px; background: #e5e7eb; margin: 4px 0 8px; overflow: hidden; }
+  .score-bar-fill { height: 100%; border-radius: 4px; }
+  .score-bar-fill.green { background: var(--green); }
+  .score-bar-fill.yellow { background: var(--yellow); }
+  .score-bar-fill.orange { background: var(--orange); }
+  .score-bar-fill.red { background: var(--red); }
+  .score-bar-fill.blue { background: var(--accent); }
+
+  /* Pros/Cons */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } .score-section { grid-template-columns: 1fr; } }
+  .pros-card { background: var(--green-light); border-radius: var(--radius); padding: 16px; }
+  .cons-card { background: var(--red-light); border-radius: var(--radius); padding: 16px; }
+  .pros-card h3 { color: var(--green); }
+  .cons-card h3 { color: var(--red); }
+  .pros-card li, .cons-card li { font-size: 13px; margin-bottom: 4px; }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: var(--border); }
+  .timeline-item { position: relative; margin-bottom: 16px; }
+  .timeline-item::before { content: ''; position: absolute; left: -20px; top: 4px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); border: 2px solid #fff; box-shadow: 0 0 0 2px var(--accent); }
+  .timeline-item .date { font-size: 12px; color: var(--text-secondary); }
+  .timeline-item .content { font-size: 13px; font-weight: 500; }
+
+  .footer { text-align: center; font-size: 12px; color: #999; margin-top: 24px; padding: 16px; }
+  .highlight-box { background: var(--yellow-light); border: 1px solid #fde68a; border-radius: var(--radius); padding: 14px 18px; margin: 12px 0; font-size: 13px; }
+  .emphasis { color: var(--red); font-weight: 700; }
+  .tag-group { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="project-id">项目编号：0747-2661SCCZAB249/01 &nbsp;|&nbsp; 分析日期：2026年7月29日</div>
+    <h1>中国药品检定研究院门户网站<br>2026年度融合改版及国产化改造采购项目 — 投标研判报告</h1>
+    <div class="meta">
+      <span>采购方：中国药品检定研究院（中检院）</span>
+      <span>代理机构：中化商务有限公司</span>
+    </div>
+  </div>
+
+  <!-- Score & Verdict -->
+  <div class="score-section">
+    <div class="score-card">
+      <div class="score-circle"><div class="score-value">70</div></div>
+      <div class="score-label">综合投标可行性评分</div>
+      <div class="verdict-badge">建议积极投标</div>
+    </div>
+    <div class="info-card">
+      <div class="info-item"><div class="label">预算金额</div><div class="value">125 万元</div></div>
+      <div class="info-item"><div class="label">采购方式</div><div class="value">公开招标（综合评分法）</div></div>
+      <div class="info-item"><div class="label">投标截止</div><div class="value">2026年8月18日 9:30</div></div>
+      <div class="info-item"><div class="label">开标地点</div><div class="value">北京市丰台区平安幸福中心B座23层</div></div>
+      <div class="info-item"><div class="label">工期要求</div><div class="value">6个月（开发+测试+试运行）</div></div>
+      <div class="info-item"><div class="label">质保期</div><div class="value">验收后1年免费运维</div></div>
+      <div class="info-item"><div class="label">是否接受联合体</div><div class="value"><span class="badge badge-red">不接受</span></div></div>
+      <div class="info-item"><div class="label">中小企业预留</div><div class="value"><span class="badge badge-yellow">不专门面向</span></div></div>
+    </div>
+  </div>
+
+  <!-- 评判结论 -->
+  <div class="section">
+    <h2>一、 评判结论</h2>
+    <p style="font-size:14px;line-height:1.8;">
+      本项目为中国药品检定研究院（中检院）门户网站的<b>三站融合改版及全栈国产化改造</b>，预算125万元，属于中等规模政府信息化采购项目。经综合评估，本项目<span class="emphasis">可行性评分 70 分（满分100）</span>，评定为<b>「建议积极投标」</b>。
+    </p>
+    <div class="highlight-box">
+      <strong>核心判断依据：</strong>
+      <ul style="margin:8px 0 0 16px;font-size:13px;">
+        <li><strong>技术分占比69%</strong>——方案质量决定胜负，价格仅占10分，适合有行业经验和技术积累的供应商发挥优势；</li>
+        <li><strong>商务门槛高但可攻克</strong>——3项体系认证+8类软著+建设+运维案例的复合门槛，过滤掉大量缺乏经验的竞争者；</li>
+        <li><strong>国产化刚需</strong>——信创政策驱动下的确定性需求，项目不会被轻易取消；</li>
+        <li><strong>中检院作为部级事业单位</strong>——付款有保障，且项目成功后可作为标杆案例撬动更多药监系统商机。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 评分卡 -->
+  <div class="section">
+    <h2>二、 评分结构与控标痕迹分析</h2>
+
+    <h3>2.1 评分权重拆解</h3>
+    <table>
+      <tr><th style="width:30%">评分维度</th><th style="width:10%">分值</th><th style="width:10%">占比</th><th>竞争关键点</th></tr>
+      <tr>
+        <td><strong>商务部分</strong></td>
+        <td><strong>21分</strong></td>
+        <td>21%</td>
+        <td>
+          • 资质证书（6分）：3个体系认证，每证2分，必拿满<br>
+          • 软著（8分）：8个具体类别，需覆盖信息发布/数据交换/整合管理/文档安全/数据安全/数据共享/数据管理/实时监控<br>
+          • 案例业绩（7分）：网站建设案例每个2分（≤4分），运维案例每个0.5分（≤3分）
+        </td>
+      </tr>
+      <tr>
+        <td><strong>技术部分</strong></td>
+        <td><strong>69分</strong></td>
+        <td>69%</td>
+        <td>
+          • 需求分析方案（10分）+ 设计方案（10分）：<span class="emphasis">共20分，核心决胜项</span><br>
+          • 项目管理方案（8分）+ 培训方案（8分）+ 售后运维（9分）= 25分<br>
+          • 安全方案（6分）+ 人员方案（8分）+ 技术保障（7分）+ 响应速度（3分）= 24分
+        </td>
+      </tr>
+      <tr>
+        <td><strong>价格部分</strong></td>
+        <td><strong>10分</strong></td>
+        <td>10%</td>
+        <td>
+          最低价得满分，其余按比例折算。价格分权重低，<span class="emphasis">无需刻意打价格战</span>，报价在115-125万区间即可。
+        </td>
+      </tr>
+    </table>
+
+    <h3>2.2 控标痕迹识别</h3>
+    <div class="highlight-box">
+      <strong>⚠️ 发现中度控标痕迹，存在一定指向性设计：</strong>
+    </div>
+    <table>
+      <tr><th style="width:5%">#</th><th style="width:30%">控标要素</th><th>分析</th><th style="width:12%">严重程度</th></tr>
+      <tr>
+        <td>1</td>
+        <td><strong>软著类别高度具体化</strong></td>
+        <td>8个软著类别（信息发布、数据交换平台、整合管理平台、文档安全管理、数据安全管理、数据共享平台、数据管理系统、实时监控系统）组合极为精准，如同一家公司的产品矩阵清单，指向性明显。</td>
+        <td><span class="badge badge-orange">中等</span></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><strong>三体系认证+软著+案例复合门槛</strong></td>
+        <td>三项ISO体系认证（质量/IT服务/信息安全）+ 8类特定软著 + 网站建设+运维双案例要求，形成层层递进的资格漏斗，中小企业很难全部满足。</td>
+        <td><span class="badge badge-yellow">中等偏弱</span></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><strong>技术方案评审主观空间大</strong></td>
+        <td>69分技术分中，8个子项均为定性评审（"针对性强"、"科学合理"等主观标准），评委自由裁量权大，可能存在印象分倾斜。</td>
+        <td><span class="badge badge-yellow">中等偏弱</span></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><strong>招标文件获取窗口短</strong></td>
+        <td>仅7天（7/28-8/4），且必须通过中化商务电子平台获取。对于事先不了解信息的供应商，报名时间紧张。</td>
+        <td><span class="badge badge-green">偏低</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 优劣势 -->
+  <div class="section">
+    <h2>三、 投标可行性深度分析</h2>
+
+    <div class="grid-2">
+      <div class="pros-card">
+        <h3>✅ 有利因素</h3>
+        <ol style="padding-left:16px;">
+          <li><strong>技术为王</strong>：技术分占69%，方案写得好可大幅拉开差距，适合技术型公司</li>
+          <li><strong>预算合理</strong>：125万对三站融合+国产化改造来说处于合理区间，毛利空间充足</li>
+          <li><strong>需求明确</strong>：招标文件附详细栏目设计、功能清单、部署要求，编制方案有据可依</li>
+          <li><strong>支付有保障</strong>：中检院为财政部预算单位，不会出现拖欠款项</li>
+          <li><strong>后续商机</strong>：药监系统下属单位众多（各省药检所），本项目可作为标杆复制推广</li>
+          <li><strong>不接受联合体</strong>：排除"拼凑型"竞标对手，有利于综合实力强的单一体</li>
+          <li><strong>国产化政策红利</strong>：信创要求提高准入门槛，过滤纯外企和缺乏国产化经验的对手</li>
+        </ol>
+      </div>
+      <div class="cons-card">
+        <h3>⚠️ 不利因素 / 风险</h3>
+        <ol style="padding-left:16px;">
+          <li><strong>可能存在「内定」供应商</strong>：软著组合过于精准，不排除已有特定供应商提前介入需求编制</li>
+          <li><strong>违约责任重</strong>：每日0.5%违约金、最高20%总价罚款、护网行动被攻破每次5万</li>
+          <li><strong>知识产权全归甲方</strong>：所有代码、文档、成果归中检院，无法沉淀为产品</li>
+          <li><strong>付款节奏对乙方不利</strong>：20%-40%-30%-10%，最后一笔10%质保期满才付，现金流压力大</li>
+          <li><strong>数据迁移风险高</strong>：三站历史数据迁移，一旦出错影响业务，修复成本不可控</li>
+          <li><strong>试运行要求苛刻</strong>：单次服务中断>4小时即为事故，系统可用性≥99.9%</li>
+          <li><strong>人员锁定</strong>：项目经理及核心人员不得随意更换，须提供社保证明和劳动合同</li>
+        </ol>
+      </div>
+    </div>
+
+    <h3>风险清单</h3>
+    <div class="risk-item risk-high">
+      <span class="risk-level badge-red">高风险</span>
+      <div class="risk-desc"><strong>数据迁移失败风险：</strong>三站历史数据格式不统一，迁移过程中数据丢失或错乱可能导致项目验收不通过。需提前做迁移演练和双轨试运行。</div>
+    </div>
+    <div class="risk-item risk-high">
+      <span class="risk-level badge-red">高风险</span>
+      <div class="risk-desc"><strong>国产化兼容性风险：</strong>国产操作系统+国产数据库+国产中间件的全栈适配可能遇到未知技术问题，建议在方案中明确备选技术路线。</div>
+    </div>
+    <div class="risk-item risk-med">
+      <span class="risk-level badge-orange">中风险</span>
+      <div class="risk-desc"><strong>竞争对手控标风险：</strong>软著组合指向性强，不排除已有供应商提前布局。如投标前无法确认自身软著覆盖度，商务分可能落后。</div>
+    </div>
+    <div class="risk-item risk-med">
+      <span class="risk-level badge-orange">中风险</span>
+      <div class="risk-desc"><strong>需求蔓延风险：</strong>合同规定甲方可提出需求变更（5%内不调价），调研过程中发现的额外需求可能导致工作量超预期。</div>
+    </div>
+    <div class="risk-item risk-low">
+      <span class="risk-level badge-yellow">低风险</span>
+      <div class="risk-desc"><strong>异常低价审查：</strong>报价低于所有有效报价均值65%或预算65%（即81.25万）将触发审查。建议报价不低于90万以避嫌。</div>
+    </div>
+  </div>
+
+  <!-- 评标标准还原 -->
+  <div class="section">
+    <h2>四、 评分标准逐项拆解与投标策略</h2>
+
+    <table>
+      <tr><th style="width:5%">序号</th><th style="width:24%">评审内容</th><th style="width:8%">满分</th><th style="width:18%">目标得分</th><th>投标策略</th></tr>
+      <tr>
+        <td>1</td><td>资质证书</td><td>6</td>
+        <td><span class="badge badge-green">6</span></td>
+        <td>必须拿满。确保3个证书均在有效期内，复印件加盖公章。</td>
+      </tr>
+      <tr>
+        <td>2</td><td>计算机软件著作权</td><td>8</td>
+        <td><span class="badge badge-green">6-8</span></td>
+        <td>盘点现有软著与8个类别的匹配度。缺的类别可通过购买或合作方式补足。优先覆盖"信息发布""数据交换平台""数据管理系统"三个核心类别。</td>
+      </tr>
+      <tr>
+        <td>3</td><td>案例业绩</td><td>7</td>
+        <td><span class="badge badge-green">5-7</span></td>
+        <td>整理2023年后的网站/门户建设项目合同（≥2个）和运维合同（≥6个），确保合同复印件含关键页。</td>
+      </tr>
+      <tr style="background:#f0f9ff;">
+        <td>4</td><td><strong>项目现状与需求分析方案</strong></td><td><strong>10</strong></td>
+        <td><span class="badge badge-green">8-10</span></td>
+        <td><strong>核心拉分项。</strong>深度研读招标文件第四章，逐条回应。重点：三站融合的难点（数据孤岛、权限体系统一、栏目差异）、国产化迁移路径、中检院业务痛点。避免"通用模板"，要体现对药品检定行业场景的理解。</td>
+      </tr>
+      <tr style="background:#f0f9ff;">
+        <td>5</td><td><strong>项目设计方案</strong></td><td><strong>10</strong></td>
+        <td><span class="badge badge-green">8-10</span></td>
+        <td><strong>核心拉分项。</strong>必须附带功能截图或原型设计图！总体架构（四层三体系）、发布平台功能设计、6个一级栏目/11个首页栏目的详细设计方案、部署架构图、数据迁移方案。建议用Axure/Figma出高保真原型。</td>
+      </tr>
+      <tr>
+        <td>6</td><td>项目管理组织方案</td><td>8</td>
+        <td><span class="badge badge-green">6-8</span></td>
+        <td>包含实施计划（甘特图）、质量保证（测试方案）、风险应对（风险矩阵）、沟通机制。展现规范的项目管理体系。</td>
+      </tr>
+      <tr>
+        <td>7</td><td>培训组织方案</td><td>8</td>
+        <td><span class="badge badge-green">6-8</span></td>
+        <td>区分三类受众（使用人员/管理人员/运维人员）的培训方案，含培训大纲、时间安排、考核方式。</td>
+      </tr>
+      <tr>
+        <td>8</td><td>售后运维服务解决方案</td><td>9</td>
+        <td><span class="badge badge-green">7-9</span></td>
+        <td>详细描述7×24运维机制、10分钟响应承诺、巡检制度、应急处理分级响应。提供过往运维案例作为佐证。</td>
+      </tr>
+      <tr>
+        <td>9</td><td>项目安全管理要求组织方案</td><td>6</td>
+        <td><span class="badge badge-green">5-6</span></td>
+        <td>覆盖等保二级、商密认证、国密算法、访问控制、安全审计等内容。体现安全防护体系。</td>
+      </tr>
+      <tr>
+        <td>10</td><td>项目人员组成方案</td><td>8</td>
+        <td><span class="badge badge-green">6-8</span></td>
+        <td>≥6人团队，提供简历+劳动合同+社保证明。项目经理须有同类项目经验证明（合同或甲方证明）。建议配置持有软考证书（系统架构师/信息系统项目管理师/信息安全工程师）的成员。</td>
+      </tr>
+      <tr>
+        <td>11</td><td>技术保障解决方案</td><td>7</td>
+        <td><span class="badge badge-green">5-7</span></td>
+        <td>描述保障体系、技术手段、信息保密承诺。强调代码安全、数据加密、备份恢复机制。</td>
+      </tr>
+      <tr>
+        <td>12</td><td>响应速度解决方案</td><td>3</td>
+        <td><span class="badge badge-green">2-3</span></td>
+        <td>承诺10分钟响应、1小时到场（紧急30分钟），附服务台/工单系统等支撑体系。</td>
+      </tr>
+      <tr style="background:#fef9c3;">
+        <td>13</td><td>投标报价</td><td>10</td>
+        <td><span class="badge badge-green">8-10</span></td>
+        <td>报价策略：建议115-125万。若预计有4家以上竞争者，可报108-118万博高分。绝不低于90万（触发异常低价审查风险）。</td>
+      </tr>
+      <tr style="font-weight:700;background:#e5e7eb;">
+        <td></td><td>合计</td><td>100</td>
+        <td><span class="badge badge-green">83-95</span></td>
+        <td>在充分准备情况下，合理预期得分区间。</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 潜在竞争对手研判 -->
+  <div class="section">
+    <h2>五、 潜在竞争对手研判（高概率参与且竞争力强）</h2>
+
+    <p style="font-size:13px;margin-bottom:12px;">基于中检院历史采购记录与本项目需求特征，以下 <strong>4 家单位</strong> 与采购方存在直接合作基础或系统关联，参与投标的概率高、且在本项目中具备难以替代的竞争优势，应作为重点防范对象：</p>
+
+    <table>
+      <tr><th style="width:22%">潜在竞争对手</th><th style="width:24%">与中检院关联 / 中标历史</th><th style="width:30%">核心壁垒与优势</th><th style="width:12%">威胁等级</th></tr>
+      <tr style="background:#fee2e2;">
+        <td><strong>宇弘信达科技（北京）有限公司</strong></td>
+        <td>2022 年中标"中国医学细菌保藏管理系统 / 网站升级建设项目"（59.62 万）</td>
+        <td>细菌保藏中心网站原开发商，掌握现有架构、数据结构、接口规范；数据迁移与系统对接具不可替代性</td>
+        <td><span class="badge badge-red">极高</span></td>
+      </tr>
+      <tr style="background:#fff7ed;">
+        <td><strong>中国电信股份有限公司</strong></td>
+        <td>2025 年中标中检院"两网合一改造项目"（117.581 万）</td>
+        <td>有中检院网站融合改造直接经验，117 万中标价与本次 125 万预算高度接近；自有云平台资源；信创生态深</td>
+        <td><span class="badge badge-red">极高</span></td>
+      </tr>
+      <tr style="background:#fff7ed;">
+        <td><strong>浪潮软件股份有限公司</strong></td>
+        <td>2025 年中标中检院"信息系统源代码、软件基础运行环境统一运维管理项目"（89 万）</td>
+        <td>熟悉中检院现有系统架构与运行环境；本身是国产服务器 / 操作系统厂商，信创生态完善</td>
+        <td><span class="badge badge-orange">高</span></td>
+      </tr>
+      <tr style="background:#fffbeb;">
+        <td><strong>中移系统集成有限公司</strong></td>
+        <td>2025 年中标中检院"综合业务管理平台（一期）"（2184.7 万）</td>
+        <td>中检院大客户，关系基础深、金额大；但主营大型业务系统，门户类项目或非强项</td>
+        <td><span class="badge badge-yellow">中等</span></td>
+      </tr>
+    </table>
+
+    <h3>5.1 重点单位深度画像</h3>
+
+    <div class="risk-item risk-high" style="margin-bottom:12px;">
+      <span class="risk-level badge-red">🥇 最需警惕 · 系统级壁垒</span>
+      <div class="risk-desc">
+        <strong>宇弘信达科技（北京）有限公司</strong><br>
+        <span style="font-size:12px;">
+        • <strong>关联历史</strong>：2022 年中标"中国医学细菌保藏管理系统 / 网站升级建设项目"，金额 59.62 万元，是该网站的原开发商。<br>
+        • <strong>核心优势</strong>：掌握现有系统架构、数据结构、接口规范，对存量系统有完整认知。<br>
+        • <strong>天然壁垒</strong>：本次项目明确要求完成细菌保藏中心网站的数据迁移和系统对接，原厂商在这方面具有不可替代的优势。<br>
+        • <strong>风险提示</strong>：若该公司参与，在"数据迁移方案"和"系统对接方案"两项评分上可能直接拿满分，对我方构成降维打击。
+        </span>
+      </div>
+    </div>
+
+    <div class="risk-item risk-high" style="margin-bottom:12px;">
+      <span class="risk-level badge-red">🥈 最可能正面交锋</span>
+      <div class="risk-desc">
+        <strong>中国电信股份有限公司</strong><br>
+        <span style="font-size:12px;">
+        • <strong>关联历史</strong>：2025 年中标中检院"两网合一改造项目"，金额 117.581 万元，与本次 125 万预算高度接近。<br>
+        • <strong>核心优势</strong>：具备中检院网站融合改造的直接经验，且自有云平台资源可满足"测试 / 试运行环境部署于投标人提供的云平台"要求。<br>
+        • <strong>国产化能力</strong>：在信创领域布局深，全栈国产化适配能力强，且有中检院既有合作基础，客户信任度高。
+        </span>
+      </div>
+    </div>
+
+    <div class="risk-item risk-high" style="margin-bottom:12px;">
+      <span class="risk-level badge-orange">🥉 信创生态型对手</span>
+      <div class="risk-desc">
+        <strong>浪潮软件股份有限公司</strong><br>
+        <span style="font-size:12px;">
+        • <strong>关联历史</strong>：2025 年中标中检院"信息系统源代码、软件基础运行环境统一运维管理项目"，金额 89 万元。<br>
+        • <strong>核心优势</strong>：熟悉中检院现有系统架构与运行环境，有长期运维服务经验。<br>
+        • <strong>国产化优势</strong>：浪潮本身是国产服务器 / 操作系统厂商，信创生态完善，国产化适配方案中可深度捆绑自有基础设施。
+        </span>
+      </div>
+    </div>
+
+    <div class="risk-item risk-medium" style="margin-bottom:12px;">
+      <span class="risk-level badge-yellow">关系型 / 非强项</span>
+      <div class="risk-desc">
+        <strong>中移系统集成有限公司</strong><br>
+        <span style="font-size:12px;">
+        • <strong>关联历史</strong>：2025 年中标中检院"综合业务管理平台（一期）"，金额高达 2184.7 万元，是中检院重大战略合作伙伴。<br>
+        • <strong>核心优势</strong>：中检院大客户，关系基础深厚，单体项目金额巨大。<br>
+        • <strong>潜在劣势</strong>：主营大型业务系统，门户网站类轻量级项目可能并非其业务强项，参与意愿与投入度存在不确定性。
+        </span>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <strong>研判结论：</strong>4 家单位均具备"中检院既有合作 / 系统关联"这一最强竞争壁垒，其中 <span class="emphasis">宇弘信达（数据迁移不可替代）</span> 与 <span class="emphasis">中国电信（融合改造同源 + 云资源 + 信创）</span> 威胁最大。我方若投标，必须在"药监 / 科研行业理解 + 国产化全栈经验 + 数据迁移成功案例"上形成差异化，并重点准备应对原厂商场景的对接与迁移方案论证。
+    </div>
+  </div>
+
+  <!-- 投标建议 -->
+  <div class="section">
+    <h2>六、 投标行动建议</h2>
+
+    <h3>6.1 投标前自查清单（Deadline: 8月4日前完成）</h3>
+    <table>
+      <tr><th>#</th><th>检查项</th><th>状态</th></tr>
+      <tr><td>1</td><td>三大体系认证证书是否在有效期内</td><td>□ 确认</td></tr>
+      <tr><td>2</td><td>软著是否覆盖8个指定类别（至少6个以上）</td><td>□ 盘点</td></tr>
+      <tr><td>3</td><td>2023年后是否有≥2个网站/门户建设合同（可复印关键页）</td><td>□ 收集</td></tr>
+      <tr><td>4</td><td>2023年后是否有≥6个网站运维合同（可复印关键页）</td><td>□ 收集</td></tr>
+      <tr><td>5</td><td>是否能组建≥6人项目团队（含1名有同类经验的项目经理）</td><td>□ 确认</td></tr>
+      <tr><td>6</td><td>是否在信用中国/中国政府采购网无不良记录</td><td>□ 查询</td></tr>
+      <tr><td>7</td><td>是否已于8月4日前在中化商务电子平台完成报名</td><td>□ 报名</td></tr>
+    </table>
+
+    <h3>6.2 关键时间节点</h3>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="date">2026年7月28日 — 8月4日</div>
+        <div class="content"><strong>招标文件获取期（仅7天）</strong> — 须在中化商务电子招投标平台注册并下载招标文件</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">2026年8月4日 — 8月16日</div>
+        <div class="content"><strong>投标文件编制期（约12天）</strong> — 最耗时的部分：技术方案撰写+原型设计+材料收集</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">2026年8月18日 9:30</div>
+        <div class="content"><strong>投标截止 & 开标</strong> — 北京市丰台区平安幸福中心B座23层2309会议室</div>
+      </div>
+      <div class="timeline-item">
+        <div class="date">2026年8月下旬（预计）</div>
+        <div class="content"><strong>评标 & 中标公示</strong></div>
+      </div>
+    </div>
+
+    <h3>6.3 方案编制要点</h3>
+    <div class="tag-group">
+      <span class="badge badge-blue">四层三体系��构图</span>
+      <span class="badge badge-blue">6个一级栏目设计方案</span>
+      <span class="badge badge-blue">高保真原型图/截图</span>
+      <span class="badge badge-blue">国产化适配矩阵</span>
+      <span class="badge badge-blue">数据迁移方案与校验</span>
+      <span class="badge badge-blue">甘特图/实施计划</span>
+      <span class="badge badge-blue">风险矩阵表</span>
+      <span class="badge badge-blue">培训大纲</span>
+      <span class="badge badge-blue">7×24运维SLA</span>
+      <span class="badge badge-blue">安全合规对照表</span>
+    </div>
+
+    <h3>6.4 报价建议</h3>
+    <div class="highlight-box">
+      <strong>推荐报价区间：115万 - 122万</strong><br>
+      理由：预算125万，报价太高（接近125万）失去价格分优势；报价太低（<90万）触发异常低价审查。115-122万既体现诚意又能保证合理利润空间。建议在分项报价表中重点体现国产化适配改造的工作量。
+    </div>
+  </div>
+
+  <!-- 项目内容概要 -->
+  <div class="section">
+    <h2>七、 项目内容概要</h2>
+    <table>
+      <tr><th style="width:20%">建设模块</th><th>核心内容</th></tr>
+      <tr><td><strong>统一发布平台</strong></td><td>三网站融合统一发布平台，统一用户/权限/架构/标准/管理/维护，按"四层三体系"架构构建</td></tr>
+      <tr><td><strong>门户网站改版</strong></td><td>6个一级栏目+11个首页栏目重新设计、智能搜索、后台编辑器纠错、访问量统计、网站监测扫描</td></tr>
+      <tr><td><strong>啮齿类资源库升级</strong></td><td>前端栏目升级、资源信息权限分级、批量数据上传/下载、统计分析、订单模块、与金税系统对接</td></tr>
+      <tr><td><strong>细菌保藏中心网站</strong></td><td>栏目架构调整（8个核心栏目）、用户体系简化（取消注册登录）、菌种分类优化、数据接口对接</td></tr>
+      <tr><td><strong>国产化适配</strong></td><td>OS/浏览器/数据库/中间件/安全全栈国产化适配，等保二级+商密认证+国密算法</td></tr>
+      <tr><td><strong>数据迁移</strong></td><td>三网站历史数据迁移，含数量/空间/内容/数据四维校验</td></tr>
+      <tr><td><strong>移动端适配</strong></td><td>三网站关键栏目的移动端适配及访问</td></tr>
+      <tr><td><strong>系统对接</strong></td><td>与中国科技资源共享网、中国医学细菌保藏管理系统、金税系统的数据接口对接</td></tr>
+    </table>
+  </div>
+
+  <!-- 合同条款 -->
+  <div class="section">
+    <h2>八、 合同条款风险提示</h2>
+    <table>
+      <tr><th>条款</th><th>风险点</th><th>建议</th></tr>
+      <tr>
+        <td>付款节奏</td>
+        <td>20%-40%-30%-10%，最后一笔质保期满一年才付</td>
+        <td>评估现金流承受能力，可尝试在投标文件中建议调整为首付30%</td>
+      </tr>
+      <tr>
+        <td>逾期违约金</td>
+        <td>每日0.5%合同总价（即每天6,250元），累计超30天甲方可解约并罚20%</td>
+        <td>工期规划留足buffer，6个月中预留至少1个月的缓冲时间</td>
+      </tr>
+      <tr>
+        <td>知识产权</td>
+        <td>全部成果（含源代码）归甲方，乙方不得以任何形式使用</td>
+        <td>在报价中充分考虑知识产权转让的对价，避免使用自有核心产品组件</td>
+      </tr>
+      <tr>
+        <td>安全违约</td>
+        <td>护网行动被攻破每次罚5万，高危漏洞每个1万</td>
+        <td>安全测试要作为独立阶段，建议引入第三方安全测评</td>
+      </tr>
+      <tr>
+        <td>需求变更</td>
+        <td>5%以内变更不调价，甲方有最终决定权</td>
+        <td>前期需求确认要详尽，变更走正式书面流程</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="footer">
+    本报告由 AI 招投标分析师自动生成 &nbsp;|&nbsp; 数据来源：招标文件原文 + 知了标讯招中标数据平台 + 中国政府采购网 &nbsp;|&nbsp; 2026年7月29日更新<br>
+    报告仅供参考，投标决策需结合贵司实际情况综合判断
+  </div>
+
+</div>
+</body>
+</html>
